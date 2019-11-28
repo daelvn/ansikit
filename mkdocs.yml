@@ -1,0 +1,38 @@
+site_name: ansikit
+repo_name: 'daelvn/ansikit'
+repo_url:  'https://github.com/daelvn/ansikit'
+
+theme:
+  name: material
+  palette:
+    primary: 'Red'
+    accent: 'Red'
+  logo:
+    icon: 'spellcheck'
+  feature:
+    tabs: true
+
+markdown_extensions:
+  - admonition
+  - meta
+  - codehilite
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/daelvn'
+    - type: 'twitter'
+      link: 'https://queer.party/@daelvn'
+
+nav:
+  - Home: 'index.md'
+  - Changelog: 'changelog.md'
+  - Modules:
+    - 'ansikit.sequence': 'module/sequence.md'
+    - 'ansikit.cursor': 'module/cursor.md'
+    - 'ansikit.page': 'module/page.md'
+    - 'ansikit.text': 'module/text.md'
