@@ -1,5 +1,5 @@
 ---
-title: ansikit.color | Lua ansikit
+title: ansikit.color | ansikit
 description: Use colors with ANSI sequences
 source: ansikit/color.moon
 ---

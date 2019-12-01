@@ -1,5 +1,5 @@
 ---
-title: ansikit.page | Lua ansikit
+title: ansikit.page | ansikit
 description: Page-manipulating functions and escape sequences.
 source: ansikit/page.moon
 ---

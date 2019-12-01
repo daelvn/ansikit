@@ -9,4 +9,6 @@ char      =    (...) -> unpack [((x) -> ("number" == type x) and (string.char x)
 _Sequence = => (...) -> @ _fn (_tr char) _not_string ...
 Sequence  = _Sequence (sb, tb="") -> (...) -> sb .. "[" .. (table.concat {...}, ";") .. tb
 
-{ :Sequence }
+SGR = Sequence 27, "m"
+
+{ :Sequence, :SGR }

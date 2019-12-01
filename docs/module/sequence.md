@@ -1,5 +1,5 @@
 ---
-title: ansikit.sequence | Lua ansikit
+title: ansikit.sequence | ansikit
 description: Form ANSI sequences easily.
 source: ansikit/sequence.moon
 ---

@@ -1,5 +1,5 @@
 ---
-title: ansikit.text | Lua ansikit
+title: ansikit.text | ansikit
 description: Text styling escape codes.
 source: ansikit/text.moon
 ---

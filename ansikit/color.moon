@@ -2,9 +2,7 @@
 -- Use colors with ANSI sequences.
 -- By daelvn
 unpack or= table.unpack
-import Sequence from require "ansikit.sequence"
-
-SGR = Sequence 27, "m"
+import SGR from require "ansikit.sequence"
 
 -- reset
 reset = SGR 0

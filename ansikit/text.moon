@@ -1,9 +1,7 @@
 -- ansikit.text
 -- Text styling escape codes.
 -- By daelvn
-import Sequence from require "ansikit.sequence"
-
-SGR = Sequence 27, "m"
+import SGR from require "ansikit.sequence"
 
 -- reset
 reset = SGR 0
@@ -78,5 +76,5 @@ notOverline = SGR 55
   :fraktur,   :notFraktur
   :framed,    :notFramed
   :encircled, :notEncircled
-  :overlined, :notOverlined
+  :overline,  :notOverline
 }

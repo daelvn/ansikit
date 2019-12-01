@@ -1,5 +1,5 @@
 ---
-title: ansikit.cursor | Lua ansikit
+title: ansikit.cursor | ansikit
 description: Cursor-manipulating functions and escape sequences.
 source: ansikit/cursor.moon
 ---
