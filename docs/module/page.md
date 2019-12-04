@@ -1,7 +1,8 @@
 ---
-title: ansikit.page | ansikit
+title: ansikit.page
 description: Page-manipulating functions and escape sequences.
-source: ansikit/page.moon
+path: tree/master/ansikit
+source: page.moon
 ---
 
 # ansikit.page

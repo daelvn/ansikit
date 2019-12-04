@@ -15,9 +15,9 @@ for k, v in pairs color4
   elseif k == "bright"
     if k == "bg"
       for kk, vv in pairs color4.bright.bg
-        mapping[kk.."brightbg"] = vv
+        mapping["bright"..kk.."bg"] = vv
     else
-      mapping[k.."bright"] = v
+      mapping["bright"..k] = v
   else
     mapping[k] = v
 
@@ -62,3 +62,9 @@ print style "%{blue bold}git:(%{red}master%{blue})"
 inBlue = style.blue.bold
 inRed  = style.red.bold
 print (inBlue "git:(") .. (inRed "master") .. (inBlue ")") .. text.reset
+
+{
+  :colorize
+  stylize: stylize!
+  :style
+}

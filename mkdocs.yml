@@ -32,7 +32,11 @@ nav:
   - Home: 'index.md'
   - Changelog: 'changelog.md'
   - Modules:
-    - 'ansikit.sequence': 'module/sequence.md'
+    - 'ansikit.color': 'module/color.md'
     - 'ansikit.cursor': 'module/cursor.md'
     - 'ansikit.page': 'module/page.md'
+    - 'ansikit.paint': 'module/paint.md'
+    - 'ansikit.palette': 'module/palette.md'
+    - 'ansikit.sequence': 'module/sequence.md'
+    - 'ansikit.style': 'module/style.md'
     - 'ansikit.text': 'module/text.md'

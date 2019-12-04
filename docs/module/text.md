@@ -1,7 +1,8 @@
 ---
-title: ansikit.text | ansikit
+title: ansikit.text
 description: Text styling escape codes.
-source: ansikit/text.moon
+path: tree/master/ansikit
+source: text.moon
 ---
 
 # ansikit.text

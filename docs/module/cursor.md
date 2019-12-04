@@ -1,7 +1,8 @@
 ---
-title: ansikit.cursor | ansikit
+title: ansikit.cursor
 description: Cursor-manipulating functions and escape sequences.
-source: ansikit/cursor.moon
+path: tree/master/ansikit
+source: cursor.moon
 ---
 
 # ansikit.cursor

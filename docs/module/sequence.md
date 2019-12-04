@@ -1,7 +1,8 @@
 ---
-title: ansikit.sequence | ansikit
+title: ansikit.sequence
 description: Form ANSI sequences easily.
-source: ansikit/sequence.moon
+path: tree/master/ansikit
+source: sequence.moon
 ---
 
 # ansikit.sequence

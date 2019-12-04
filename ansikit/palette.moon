@@ -61,7 +61,7 @@ color8 = setmetatable {}, __index: (idx) =>
 
 -- RGB representation
 -- print (Color 255, 255, 255) -- white ansi code
-Color = (r, g, b, bg=false) -> setmetatable {:r, :g, :b, :bg}, {
+Color = (r=0, g=0, b=0, bg=false) -> setmetatable {:r, :g, :b, :bg}, {
   __type:     "Color"
   __tostring:     => Bit24 @r, @g, @b, @bg
   __concat:   (b) =>
@@ -102,9 +102,19 @@ addColor = (pal) -> (name, color) -> pal.__colors[name] = color
 -- Remove color from palette
 removeColor = (pal) -> (name) -> pal.__colors[name] = nil
 
+-- Converts a Hex code to RGB. Accepts #rrggbb as a string only, and any hex literal.
+-- https://gist.github.com/fernandohenriques/12661bf250c8c2d8047188222cab7e28
+hexToRGB = (hex) ->
+  switch type hex
+    when "string" then hex = tostring hex\gsub "#", ""
+    when "number" then hex = "#{string.format "%6.6X", hex}"
+  ox  = (str) -> "0x" .. str
+  return (tonumber ox hex\sub 1,2), (tonumber ox hex\sub 3,4), (tonumber ox hex\sub 5,6)
+
 {
   :color4, :color8
   :Color, :background, :foreground
   :Palette
   :nameFor, :addColor, :removeColor
+  :hexToRGB
 }

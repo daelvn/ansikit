@@ -1,7 +1,8 @@
 ---
-title: ansikit.palette | ansikit
+title: ansikit.palette
 description: Palettes and color representations for ansikit.
-source: ansikit/palette.moon
+path: tree/master/ansikit
+source: palette.moon
 ---
 # ansikit.palettte
 
@@ -9,7 +10,7 @@ Palettes and color representations for ansikit.
 
 ## color4
 
-A table that contains a collection of [Bit4](module/color#bit4) colors.
+A table that contains a collection of [Bit4](/module/color#bit4) colors.
 
 ```markdown
 - black
@@ -26,7 +27,7 @@ It can be prefixed with modifiers such as `bg` or `bright`, so you can address `
 
 ## color8
 
-Table that generates [Bit8](module/color#bit8) colors based on an index. Accepts a single `bg` modifier. They are accessed with an underscore on front, such as `color8._255` or `color8.bg._48`.
+Table that generates [Bit8](/module/color#bit8) colors based on an index. Accepts a single `bg` modifier. They are accessed with an underscore on front, such as `color8._255` or `color8.bg._48`.
 
 ## Color
 
@@ -49,6 +50,12 @@ Takes a `Color` and sets it to a background color.
 ## foreground
 
 Takes a `Color` and sets it to a foreground color.
+
+## hexToRGB
+
+**Signature →** `(number|string) -> number, number, number`<br>
+
+Taxes a hex number or 6-digit long hex string and turns it into three RGB components.
 
 ## Palette
 

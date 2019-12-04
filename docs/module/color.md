@@ -1,7 +1,8 @@
 ---
-title: ansikit.color | ansikit
+title: ansikit.color
 description: Use colors with ANSI sequences
-source: ansikit/color.moon
+path: tree/master/ansikit
+source: color.moon
 ---
 
 # ansikit.color
