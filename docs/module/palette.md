@@ -29,34 +29,6 @@ It can be prefixed with modifiers such as `bg` or `bright`, so you can address `
 
 Table that generates [Bit8](/module/color#bit8) colors based on an index. Accepts a single `bg` modifier. They are accessed with an underscore on front, such as `color8._255` or `color8.bg._48`.
 
-## Color
-
-**Signature →** `(number, number, number, [boolean]) -> Color`<br>
-
-A function that creates a representation of an RGB color, with an optional background flag (if set to false, will be used as foreground, and otherwise as background. Defaults to false). The colors are passed in order `r`, `g`, `b`.
-
-```lua tab="Lua"
-white = Color(255,255,255)
-```
-
-```moonscript tab="MoonScript"
-white = Color 255, 255, 255
-```
-
-## background
-
-Takes a `Color` and sets it to a background color.
-
-## foreground
-
-Takes a `Color` and sets it to a foreground color.
-
-## hexToRGB
-
-**Signature →** `(number|string) -> number, number, number`<br>
-
-Taxes a hex number or 6-digit long hex string and turns it into three RGB components.
-
 ## Palette
 
 **Signature →** `(string, [table]) -> Palette`<br>

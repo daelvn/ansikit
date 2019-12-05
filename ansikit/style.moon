@@ -57,12 +57,6 @@ style = setmetatable {}, {
   __index: (idx) => stylize![idx]
 }
 
-print style "%{blue bold}git:(%{red}master%{blue})"
-
-inBlue = style.blue.bold
-inRed  = style.red.bold
-print (inBlue "git:(") .. (inRed "master") .. (inBlue ")") .. text.reset
-
 {
   :colorize
   stylize: stylize!

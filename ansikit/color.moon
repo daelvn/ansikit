@@ -16,4 +16,41 @@ Bit8  = (index=0, bg=false) -> SGR (bg and 48 or 38), 5, index
 -- 24-bit
 Bit24 = (r=0, g=0, b=0, bg=false) -> SGR (bg and 48 or 38), 2, r, g, b
 
-{ :reset, :Bit4, :Bit8, :Bit24 }
+-- RGB representation
+-- print (Color 255, 255, 255) -- white ansi code
+Color = (r=0, g=0, b=0, bg=false) -> setmetatable {:r, :g, :b, :bg}, {
+  __type:     "Color"
+  __tostring:     => Bit24 @r, @g, @b, @bg
+  __concat:   (b) =>
+    if "Color" == type b
+      (tostring @) .. (tostring b)
+    elseif "string" == type b
+      (tostring @) .. b
+    else
+      return b
+}
+
+-- Turns a color into a background color
+background = =>
+  @bg = true
+  @
+
+-- Turns a color into a foreground color
+foreground = =>
+  @bg = false
+  @
+
+-- Converts a Hex code to RGB. Accepts #rrggbb as a string only, and any hex literal.
+-- https://gist.github.com/fernandohenriques/12661bf250c8c2d8047188222cab7e28
+hexToRGB = (hex) ->
+  switch type hex
+    when "string" then hex = tostring hex\gsub "#", ""
+    when "number" then hex = "#{string.format "%6.6X", hex}"
+  ox  = (str) -> "0x" .. str
+  return (tonumber ox hex\sub 1,2), (tonumber ox hex\sub 3,4), (tonumber ox hex\sub 5,6)
+
+{
+  :reset, :Bit4, :Bit8, :Bit24
+  :Color, :background, :foreground
+  :hexToRGB
+}

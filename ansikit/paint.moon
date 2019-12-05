@@ -1,7 +1,8 @@
 -- ansikit.paint
 -- NFP Paint format handler (CraftOS)
 -- By daelvn
-import Palette, Color, hexToRGB, background from require "ansikit.palette" 
+import Palette                     from require "ansikit.palette"
+import Color, hexToRGB, background from require "ansikit.color"
 hex = hexToRGB
 
 i = require "inspect"
