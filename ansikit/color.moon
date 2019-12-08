@@ -1,7 +1,6 @@
 -- ansikit.color
 -- Use colors with ANSI sequences.
 -- By daelvn
-unpack or= table.unpack
 import SGR from require "ansikit.sequence"
 
 -- reset
@@ -21,13 +20,13 @@ Bit24 = (r=0, g=0, b=0, bg=false) -> SGR (bg and 48 or 38), 2, r, g, b
 Color = (r=0, g=0, b=0, bg=false) -> setmetatable {:r, :g, :b, :bg}, {
   __type:     "Color"
   __tostring:     => Bit24 @r, @g, @b, @bg
-  __concat:   (b) =>
-    if "Color" == type b
-      (tostring @) .. (tostring b)
-    elseif "string" == type b
-      (tostring @) .. b
+  __concat:   (b_) =>
+    if "Color" == type b_
+      (tostring @) .. (tostring b_)
+    elseif "string" == type b_
+      (tostring @) .. b_
     else
-      return b
+      return b_
 }
 
 -- Turns a color into a background color

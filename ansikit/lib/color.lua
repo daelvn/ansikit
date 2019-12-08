@@ -17,7 +17,7 @@
  * @return  Array           The HSL representation
 ]]
 local function rgbToHsl(r, g, b, a)
-  a = a or 255
+  a          = a or 255
   r, g, b, a = r / 255, g / 255, b / 255, a / 255
 
   local max, min = math.max(r, g, b), math.min(r, g, b)
@@ -94,6 +94,7 @@ end
  * @return  Array           The HSV representation
 ]]
 local function rgbToHsv(r, g, b, a)
+  a          = a or 255
   r, g, b, a = r / 255, g / 255, b / 255, a / 255
   local max, min = math.max(r, g, b), math.min(r, g, b)
   local h, s, v
@@ -132,7 +133,7 @@ local function hsvToRgb(h, s, v, a)
   a = a or 1
   local r, g, b
 
-  local i = Math.floor(h * 6);
+  local i = math.floor(h * 6);
   local f = h * 6 - i;
   local p = v * (1 - s);
   local q = v * (1 - f * s);

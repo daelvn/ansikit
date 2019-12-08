@@ -1,328 +1,202 @@
 -- ansikit.extra.color
 -- Color handling library, similar to TinyColor
 -- By daelvn
-import hexToRGB                               from require "ansikit.color"
-import rgbToHsv, rgbToHsl, hslToRgb, hsvToRgb from require "ansikit.lib.color"
-i = require "inspect"
+import hslToRgb, hsvToRgb from require "ansikit.lib.color"
+import _Color             from require "ansikit.extra.conversion"
+import
+  toHSV, toHSVA, toHSL, toHSLA, toHSVString, toHSVAString, toHSLString, toHSLAString,
+  toHex, toHex8, toHex3String, toHex4String, toHex4String, toHex6String, toHex8String,
+  toRGB, toRGBA, toRGBString, toRGBAString, toRGBPercentageString, toRGBAPercentageString,
+  toName, toString,
+  isRGB, isRGBA, isHSL, isHSLA, isHSV, isHSVA,
+  isHex3, isHex4, isHex6, isHex8,
+  cssToDecimal, clamp1, clamp255
+from require "ansikit.extra.conversion"
+type                                             = require "typical"
+i                                                = require "inspect"
+tee_count                                        = 0
+tee                                              = (...) ->
+  tee_count += 1
+  print tee_count, i ...
+  ...
 
 -- List of accepted names
 -- Exactly as the one in TinyColor
 names = {
-  aliceblue: "f0f8ff"
-  antiquewhite: "faebd7"
-  aqua: "0ff"
-  aquamarine: "7fffd4"
-  azure: "f0ffff"
-  beige: "f5f5dc"
-  bisque: "ffe4c4"
-  black: "000"
-  blanchedalmond: "ffebcd"
-  blue: "00f"
-  blueviolet: "8a2be2"
-  brown: "a52a2a"
-  burlywood: "deb887"
-  burntsienna: "ea7e5d"
-  cadetblue: "5f9ea0"
-  chartreuse: "7fff00"
-  chocolate: "d2691e"
-  coral: "ff7f50"
-  cornflowerblue: "6495ed"
-  cornsilk: "fff8dc"
-  crimson: "dc143c"
-  cyan: "0ff"
-  darkblue: "00008b"
-  darkcyan: "008b8b"
-  darkgoldenrod: "b8860b"
-  darkgray: "a9a9a9"
-  darkgreen: "006400"
-  darkgrey: "a9a9a9"
-  darkkhaki: "bdb76b"
-  darkmagenta: "8b008b"
-  darkolivegreen: "556b2f"
-  darkorange: "ff8c00"
-  darkorchid: "9932cc"
-  darkred: "8b0000"
-  darksalmon: "e9967a"
-  darkseagreen: "8fbc8f"
-  darkslateblue: "483d8b"
-  darkslategray: "2f4f4f"
-  darkslategrey: "2f4f4f"
-  darkturquoise: "00ced1"
-  darkviolet: "9400d3"
-  deeppink: "ff1493"
-  deepskyblue: "00bfff"
-  dimgray: "696969"
-  dimgrey: "696969"
-  dodgerblue: "1e90ff"
-  firebrick: "b22222"
-  floralwhite: "fffaf0"
-  forestgreen: "228b22"
-  fuchsia: "f0f"
-  gainsboro: "dcdcdc"
-  ghostwhite: "f8f8ff"
-  gold: "ffd700"
-  goldenrod: "daa520"
-  gray: "808080"
-  green: "008000"
-  greenyellow: "adff2f"
-  grey: "808080"
-  honeydew: "f0fff0"
-  hotpink: "ff69b4"
-  indianred: "cd5c5c"
-  indigo: "4b0082"
-  ivory: "fffff0"
-  khaki: "f0e68c"
-  lavender: "e6e6fa"
-  lavenderblush: "fff0f5"
-  lawngreen: "7cfc00"
-  lemonchiffon: "fffacd"
-  lightblue: "add8e6"
-  lightcoral: "f08080"
-  lightcyan: "e0ffff"
-  lightgoldenrodyellow: "fafad2"
-  lightgray: "d3d3d3"
-  lightgreen: "90ee90"
-  lightgrey: "d3d3d3"
-  lightpink: "ffb6c1"
-  lightsalmon: "ffa07a"
-  lightseagreen: "20b2aa"
-  lightskyblue: "87cefa"
-  lightslategray: "789"
-  lightslategrey: "789"
-  lightsteelblue: "b0c4de"
-  lightyellow: "ffffe0"
-  lime: "0f0"
-  limegreen: "32cd32"
-  linen: "faf0e6"
-  magenta: "f0f"
-  maroon: "800000"
-  mediumaquamarine: "66cdaa"
-  mediumblue: "0000cd"
-  mediumorchid: "ba55d3"
-  mediumpurple: "9370db"
-  mediumseagreen: "3cb371"
-  mediumslateblue: "7b68ee"
-  mediumspringgreen: "00fa9a"
-  mediumturquoise: "48d1cc"
-  mediumvioletred: "c71585"
-  midnightblue: "191970"
-  mintcream: "f5fffa"
-  mistyrose: "ffe4e1"
-  moccasin: "ffe4b5"
-  navajowhite: "ffdead"
-  navy: "000080"
-  oldlace: "fdf5e6"
-  olive: "808000"
-  olivedrab: "6b8e23"
-  orange: "ffa500"
-  orangered: "ff4500"
-  orchid: "da70d6"
-  palegoldenrod: "eee8aa"
-  palegreen: "98fb98"
-  paleturquoise: "afeeee"
-  palevioletred: "db7093"
-  papayawhip: "ffefd5"
-  peachpuff: "ffdab9"
-  peru: "cd853f"
-  pink: "ffc0cb"
-  plum: "dda0dd"
-  powderblue: "b0e0e6"
-  purple: "800080"
-  rebeccapurple: "663399"
-  red: "f00"
-  rosybrown: "bc8f8f"
-  royalblue: "4169e1"
-  saddlebrown: "8b4513"
-  salmon: "fa8072"
-  sandybrown: "f4a460"
-  seagreen: "2e8b57"
-  seashell: "fff5ee"
-  sienna: "a0522d"
-  silver: "c0c0c0"
-  skyblue: "87ceeb"
-  slateblue: "6a5acd"
-  slategray: "708090"
-  slategrey: "708090"
-  snow: "fffafa"
-  springgreen: "00ff7f"
-  steelblue: "4682b4"
-  tan: "d2b48c"
-  teal: "008080"
-  thistle: "d8bfd8"
-  tomato: "ff6347"
-  turquoise: "40e0d0"
-  violet: "ee82ee"
-  wheat: "f5deb3"
-  white: "fff"
-  whitesmoke: "f5f5f5"
-  yellow: "ff0"
-  yellowgreen: "9acd32"
+  aliceblue:            "#F0F8FF"
+  antiquewhite:         "#FAEBD7"
+  aqua:                 "#00FFFF"
+  aquamarine:           "#7FFFD4"
+  azure:                "#F0FFFF"
+  beige:                "#F5F5DC"
+  bisque:               "#FFE4C4"
+  black:                "#000000"
+  blanchedalmond:       "#FFEBCD"
+  blue:                 "#0000FF"
+  blueviolet:           "#8A2BE2"
+  brown:                "#A52A2A"
+  burlywood:            "#DEB887"
+  burntsienna:          "#EA7E5D"
+  cadetblue:            "#5F9EA0"
+  chartreuse:           "#7FFF00"
+  chocolate:            "#D2691E"
+  coral:                "#FF7F50"
+  cornflowerblue:       "#6495ED"
+  cornsilk:             "#FFF8DC"
+  crimson:              "#DC143C"
+  cyan:                 "#00FFFF"
+  darkblue:             "#00008B"
+  darkcyan:             "#008B8B"
+  darkgoldenrod:        "#B8860B"
+  darkgray:             "#A9A9A9"
+  darkgreen:            "#006400"
+  darkgrey:             "#A9A9A9"
+  darkkhaki:            "#BDB76B"
+  darkmagenta:          "#8B008B"
+  darkolivegreen:       "#556B2F"
+  darkorange:           "#FF8C00"
+  darkorchid:           "#9932CC"
+  darkred:              "#8B0000"
+  darksalmon:           "#E9967A"
+  darkseagreen:         "#8FBC8F"
+  darkslateblue:        "#483D8B"
+  darkslategray:        "#2F4F4F"
+  darkslategrey:        "#2F4F4F"
+  darkturquoise:        "#00CED1"
+  darkviolet:           "#9400D3"
+  deeppink:             "#FF1493"
+  deepskyblue:          "#00BFFF"
+  dimgray:              "#696969"
+  dimgrey:              "#696969"
+  dodgerblue:           "#1E90FF"
+  firebrick:            "#B22222"
+  floralwhite:          "#FFFAF0"
+  forestgreen:          "#228B22"
+  fuchsia:              "#FF00FF"
+  gainsboro:            "#DCDCDC"
+  ghostwhite:           "#F8F8FF"
+  gold:                 "#FFD700"
+  goldenrod:            "#DAA520"
+  gray:                 "#808080"
+  green:                "#008000"
+  greenyellow:          "#ADFF2F"
+  grey:                 "#808080"
+  honeydew:             "#F0FFF0"
+  hotpink:              "#FF69B4"
+  indianred:            "#CD5C5C"
+  indigo:               "#4B0082"
+  ivory:                "#FFFFF0"
+  khaki:                "#F0E68C"
+  lavender:             "#E6E6FA"
+  lavenderblush:        "#FFF0F5"
+  lawngreen:            "#7CFC00"
+  lemonchiffon:         "#FFFACD"
+  lightblue:            "#ADD8E6"
+  lightcoral:           "#F08080"
+  lightcyan:            "#E0FFFF"
+  lightgoldenrodyellow: "#FAFAD2"
+  lightgray:            "#D3D3D3"
+  lightgreen:           "#90EE90"
+  lightgrey:            "#D3D3D3"
+  lightpink:            "#FFB6C1"
+  lightsalmon:          "#FFA07A"
+  lightseagreen:        "#20B2AA"
+  lightskyblue:         "#87CEFA"
+  lightslategray:       "#778899"
+  lightslategrey:       "#778899"
+  lightsteelblue:       "#B0C4DE"
+  lightyellow:          "#FFFFE0"
+  lime:                 "#00FF00"
+  limegreen:            "#32CD32"
+  linen:                "#FAF0E6"
+  magenta:              "#FF00FF"
+  maroon:               "#800000"
+  mediumaquamarine:     "#66CDAA"
+  mediumblue:           "#0000CD"
+  mediumorchid:         "#BA55D3"
+  mediumpurple:         "#9370DB"
+  mediumseagreen:       "#3CB371"
+  mediumslateblue:      "#7B68EE"
+  mediumspringgreen:    "#00FA9A"
+  mediumturquoise:      "#48D1CC"
+  mediumvioletred:      "#C71585"
+  midnightblue:         "#191970"
+  mintcream:            "#F5FFFA"
+  mistyrose:            "#FFE4E1"
+  moccasin:             "#FFE4B5"
+  navajowhite:          "#FFDEAD"
+  navy:                 "#000080"
+  oldlace:              "#FDF5E6"
+  olive:                "#808000"
+  olivedrab:            "#6B8E23"
+  orange:               "#FFA500"
+  orangered:            "#FF4500"
+  orchid:               "#DA70D6"
+  palegoldenrod:        "#EEE8AA"
+  palegreen:            "#98FB98"
+  paleturquoise:        "#AFEEEE"
+  palevioletred:        "#DB7093"
+  papayawhip:           "#FFEFD5"
+  peachpuff:            "#FFDAB9"
+  peru:                 "#CD853F"
+  pink:                 "#FFC0CB"
+  plum:                 "#DDA0DD"
+  powderblue:           "#B0E0E6"
+  purple:               "#800080"
+  rebeccapurple:        "#663399"
+  red:                  "#FF0000"
+  rosybrown:            "#BC8F8F"
+  royalblue:            "#4169E1"
+  saddlebrown:          "#8B4513"
+  salmon:               "#FA8072"
+  sandybrown:           "#F4A460"
+  seagreen:             "#2E8B57"
+  seashell:             "#FFF5EE"
+  sienna:               "#A0522D"
+  silver:               "#C0C0C0"
+  skyblue:              "#87CEEB"
+  slateblue:            "#6A5ACD"
+  slategray:            "#708090"
+  slategrey:            "#708090"
+  snow:                 "#FFFAFA"
+  springgreen:          "#00FF7F"
+  steelblue:            "#4682B4"
+  tan:                  "#D2B48C"
+  teal:                 "#008080"
+  thistle:              "#D8BFD8"
+  tomato:               "#FF6347"
+  turquoise:            "#40E0D0"
+  violet:               "#EE82EE"
+  wheat:                "#F5DEB3"
+  white:                "#FFFFFF"
+  whitesmoke:           "#F5F5F5"
+  yellow:               "#FFFF00"
+  yellowgreen:          "#9ACD32"
 }
 
 -- Inverted name list
 hexNames = {v, k for k, v in pairs names}
 
--- Makes string into a parseable bare minumum.
--- "RGB(0, 0, 0)" -> "rgb 0 0 0"
-strip = (str) -> return with string.lower str
-  str = \gsub ",",    " "
-  str = \gsub "[()]", " "
-  str = \gsub "%s+",  " "
+-- Turns a color table into a string
+unparseColor = (c) ->
+  if c.r and c.g and c.b
+    return "rgb#{c.a and "a" or ""} #{c.r} #{c.g} #{c.b} #{c.a or ""}"
+  elseif c.h and c.s and c.l
+    return "hsl#{c.a and "a" or ""} #{c.h} #{c.s} #{c.l} #{c.a or ""}"
+  elseif c.h and c.s and c.v
+    return "hsv#{c.a and "a" or ""} #{c.h} #{c.s} #{c.v} #{c.a or ""}"
 
--- Splits a string into words.
-words = (str) -> [word for word in str\gmatch "%S+"]
-
--- Turns a CSS unit into a decimal number.
-cssToDecimal = (unit="") ->
-  CSS_INTEGER = "[+-]?%d+%%?"
-  CSS_NUMBER  = "[+-]?%d+%.%d+%%?"
-  if u = unit\match CSS_INTEGER
-    sign   = u\match"^[+-]"
-    number = u\match"%d+"
-    perc   = u\match"%%" and true or false
-    final  = ""
-    sign or= ""
-    if perc
-      final ..= sign.."0."..number
-    else
-      final ..= sign..number
-    return tonumber final
-  elseif u = unit\match CSS_NUMBER
-    sign   = u\match"^[+-]"
-    number = u\match"%d+%.%d+"
-    perc   = u\match"%%" and true or false
-    final  = ""
-    sign or= ""
-    if perc
-      if number\match "^%d%d"
-        final ..= sign.."0."..(number\gsub "%.","0")
-      else
-        final ..= sign.."0.0"..(number\gsub "%.","0")
-    else
-      final ..= sign..number
-    return tonumber final
-  else return false
-
--- check that none of the values is false
-guard = (t) ->
-  for k, v in pairs t do return false unless v
-  return t
-
--- checks for several formats using Lua patterns.
-isRGB = (str) ->
-  parts = words strip str
-  return false if parts[1] != "rgb"
-  guard {
-    r: cssToDecimal parts[2]
-    g: cssToDecimal parts[3]
-    b: cssToDecimal parts[4]
-    format: "rgb"
-  }
-isRGBA = (str) ->
-  parts = words strip str
-  return false if parts[1] != "rgba"
-  guard {
-    r: cssToDecimal parts[2]
-    g: cssToDecimal parts[3]
-    b: cssToDecimal parts[4]
-    a: cssToDecimal parts[5]
-    format: "rgba"
-  }
-isHSL = (str) ->
-  parts = words strip str
-  return false if parts[1] != "hsl"
-  guard {
-    h: (cssToDecimal parts[2]) / 360
-    s:  cssToDecimal parts[3]
-    l:  cssToDecimal parts[4]
-    format: "hsl"
-  }
-isHSLA = (str) ->
-  parts = words strip str
-  return false if parts[1] != "hsla"
-  guard {
-    h: (cssToDecimal parts[2]) / 360
-    s:  cssToDecimal parts[3]
-    l:  cssToDecimal parts[4]
-    a:  cssToDecimal parts[5]
-    format: "hsla"
-  }
-isHSV = (str) ->
-  parts = words strip str
-  return false if parts[1] != "hsv"
-  guard {
-    h: (cssToDecimal parts[2]) / 360
-    s:  cssToDecimal parts[3]
-    v:  cssToDecimal parts[4]
-    format: "hsv"
-  }
-isHSVA = (str) ->
-  parts = words strip str
-  return false if parts[1] != "hsva"
-  guard {
-    h: (cssToDecimal parts[2]) / 360
-    s:  cssToDecimal parts[3]
-    v:  cssToDecimal parts[4]
-    a:  cssToDecimal parts[5]
-    format: "hsva"
-  }
-isHex3 = (str) ->
-  ox = (s) -> "0x" .. s
-  return hexToRgb str if "number" == type str
-  r, g, b = str\match "#?(%x)(%x)(%x)"
-  if r and g and b
-    return {
-      r: tonumber ox r
-      g: tonumber ox g
-      b: tonumber ox b
-      format: "hex3"
-    }
-  else false
-isHex4 = (str) ->
-  ox = (s) -> "0x" .. s
-  return hexToRgb str if "number" == type str
-  r, g, b, a = str\match "#?(%x)(%x)(%x)(%x)"
-  if r and g and b and a
-    return {
-      r: tonumber ox r
-      g: tonumber ox g
-      b: tonumber ox b
-      a: tonumber ox a
-      format: "hex4"
-    }
-  else false
-isHex6 = (str) ->
-  ox = (s) -> "0x" .. s
-  return hexToRgb str if "number" == type str
-  r, g, b = str\match "#?(%x%x)(%x%x)(%x%x)"
-  if r and g and b
-    return {
-      r: tonumber ox r
-      g: tonumber ox g
-      b: tonumber ox b
-      format: "hex6"
-    }
-  else false
-isHex8 = (str) ->
-  ox = (s) -> "0x" .. s
-  return hexToRgb str if "number" == type str
-  r, g, b, a = str\match "#?(%x%x)(%x%x)(%x%x)(%x%x)"
-  if r and g and b and a
-    return {
-      r: tonumber ox r
-      g: tonumber ox g
-      b: tonumber ox b
-      a: tonumber ox a
-      format: "hex8"
-    }
-  else false
-  
 -- Turns a string into a color table.
 parseColor = (color) ->
-  if "string" == type color
-    with string.lower color -- trim spaces & turn into lowercase
-      color = \gsub "^%s+", ""
-      color = \gsub "%s+$", ""
+  switch type color
+    when "Color"
+      return color
+    when "string"
+      with string.lower color -- trim spaces & turn into lowercase
+        color = \gsub "^%s+", ""
+        color = \gsub "%s+$", ""
+    when "table"
+      color = unparseColor color
 
   -- check if a name was used
   named = false
@@ -333,22 +207,22 @@ parseColor = (color) ->
     return {r:0, g:0, b:0, a:255, format: "name"}
 
   -- return
-  return (isRGB color) or
-    (isRGBA color) or
-    (isHSL  color) or
-    (isHSLA color) or
-    (isHSV  color) or
-    (isHSVA color) or
-    (isHex8 color) or
-    (isHex6 color) or
-    (isHex4 color) or
-    (isHex3 color)
+  return (isRGB color, named) or
+    (isRGBA color, named) or
+    (isHSL  color, named) or
+    (isHSLA color, named) or
+    (isHSV  color, named) or
+    (isHSVA color, named) or
+    (isHex8 color, named) or
+    (isHex6 color, named) or
+    (isHex4 color, named) or
+    (isHex3 color, named)
 
 -- Round up to the nearest integer
-round = (n) -> if (n%1) > 0.5 then math.ceil n else math.floor n
+round = (n) -> if (n%1) >= 0.5 then math.ceil n else math.floor n
 
 -- Converts any color table to RGBA
-toRGBA = (c) ->
+_toRGBA = (c) ->
   c = parseColor c if "string" == type c
   switch c.format
     when "rgba" then return c
@@ -357,17 +231,17 @@ toRGBA = (c) ->
       return c
     when "hsl"
       r, g, b = hslToRgb c.h, c.s, c.l
-      { :r, :g, :b, a: 255, format: "rgba" }
+      { :r, :g, :b, a: 255, format: "hsl" }
     when "hsla"
       r, g, b, a = hslToRgb c.h, c.s, c.l, c.a
-      { :r, :g, :b, :a, format: "rgba" }
+      { :r, :g, :b, :a, format: "hsla" }
     when "hsv"
       r, g, b = hsvToRgb c.h, c.s, c.v
-      { :r, :g, :b, a: 255, format: "rgba" }
+      { :r, :g, :b, a: 255, format: "hsv" }
     when "hsva"
       r, g, b, a = hsvToRgb c.h, c.s, c.v, c.a
-      { :r, :g, :b, :a, format: "rgba" }
-    else error "ansikit.extra.color/toRGBA $ color format #{c.format} not recognized"
+      { :r, :g, :b, :a, format: "hsva" }
+    else error "_toRGBA $ color format #{c.format} not recognized"
 
 -- Rounds all r, g, b, h, s, v, l, a keys in a table.
 roundAll = (t) ->
@@ -382,25 +256,72 @@ Color = (cl) ->
   this = {}
   --
   this.original = cl
-  this.color    = parseColor cl
-  this.round    = {}
-  with toRGBA cl
-    this.r       = .r
-    this.g       = .g
-    this.b       = .b
-    this.a       = .a
-    this.round.r = round .r
-    this.round.g = round .g
-    this.round.b = round .b
-    this.round.a = round .a
+  --this.color    = parseColor cl
+  this.raw      = {}
+  with _toRGBA parseColor cl
+    this.r = round .r
+    this.g = round .g
+    this.b = round .b
+    this.a = round .a
+    this.raw.r = .r
+    this.raw.g = .g
+    this.raw.b = .b
+    this.raw.a = .a
   --
   setmetatable this, __type: "Color"
 
--- Checks the brightness of a color
-brightnessFor = (cl) -> (cl.r * 299 + cl.g * 587 + cl.b * 114) / 1000
+-- Gets the brightness of a color
+brightnessFor = _Color (cl) -> (cl.r * 299 + cl.g * 587 + cl.b * 114) / 1000
 
 -- Checks if the color is light or dark
-isLight = (cl) -> (brightnessFor cl) > 128
-isDark  = (cl) -> not isLight cl
+isLight = _Color (cl) -> (brightnessFor cl) > 128
+isDark  = _Color (cl) -> not isLight cl
 
-print i Color "hsl 260 66% 80%"
+-- Gets the luminance of a color
+luminanceFor = _Color (cl) ->
+  rr, gg, bb = cl.r/255, cl.g/255, cl.b/255
+  local R, G, B
+  if rr > 0.03928 then R = rr / 12.92 else R = ((rr + 0.055) / 1.055) ^ 2.4
+  if gg > 0.03928 then G = gg / 12.92 else G = ((gg + 0.055) / 1.055) ^ 2.4
+  if bb > 0.03928 then B = bb / 12.92 else B = ((bb + 0.055) / 1.055) ^ 2.4
+  return (0.2126 * R) + (0.7152 * G) + (0.0722 * B)
+
+-- Clones a color
+clone = _Color (cl) -> Color toString cl
+
+-- Desaturate
+desaturate = _Color (cl) -> (amount=10) ->
+  hsva    = tee toHSVA cl
+  hsva.s -= amount / 100
+  hsva.s  = clamp1 hsva.s
+  Color hsva
+
+darkblue = Color "hsva 250 50% 50% 255"
+print "Color",       i darkblue
+print "_RGBA",       i _toRGBA parseColor darkblue
+print "RGBA",        i toRGBA darkblue
+print "HSVA",        i toHSVA darkblue
+print "Desaturated", i (desaturate darkblue) 10
+
+{
+  :names, :hexNames
+  :unparseColor, :parseColor
+  :roundAll
+  :Color
+  :brightnessFor, :luminanceFor
+  :isLight, :isDark
+  :clone
+  :desaturate
+  -- from ansikit.extra.conversion
+  :_Color
+  :toHSV, :toHSVA, :toHSL, :toHSLA
+  :toHSVString, :toHSVAString, :toHSLString, :toHSLAString
+  :toHex, :toHex8
+  :toHex3String, :toHex4String, :toHex6String, :toHex8String
+  :toRGB, :toRGBA
+  :toRGBString, :toRGBAString, :toRGBPercentageString, :toRGBAPercentageString
+  :toName, :toString
+  :isRGB, :isRGBA, :isHSL, :isHSLA, :isHSV, :isHSVA
+  :isHex3, :isHex4, :isHex6, :isHex8
+  :cssToDecimal
+}
