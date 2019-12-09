@@ -1,13 +1,17 @@
 -- ansikit.extra.conversion
 -- Conversions for ansikit.extra.color
 -- By daelvn
-import hexToRGB                               from require "ansikit.color"
-import rgbToHsv, rgbToHsl, hslToRgb, hsvToRgb from require "ansikit.lib.color"
-import _fn, _er                               from require "guardia"
-import _not_Color                             from require "guardia.guards"
+import hexToRGB           from require "ansikit.color"
+import rgbToHsv, rgbToHsl from require "ansikit.lib.color"
+import hexNames           from require "ansikit.extra.names"
+import _fn, _er           from require "guardia"
+import _not_Color         from require "guardia.guards"
 
 -- Color type guard
 _Color = => (cl) -> @ _fn (_er "ansikit $ expected type Color") _not_Color cl
+
+-- Round up to the nearest integer
+round = (n) -> if (n%1) >= 0.5 then math.ceil n else math.floor n
 
 -- Makes string into a parseable bare minumum.
 -- "RGB(0, 0, 0)" -> "rgb 0 0 0"
@@ -177,148 +181,151 @@ isHex8 = (str, named=false) ->
   else false
 
 -- Returns a HSV color table with h between [0,360] and s,v values between [0,1]
-  toHSV = _Color (cl) ->
-    h, s, v = rgbToHsv cl.r, cl.g, cl.b
-    h *= 360
-    { :h, :s, :v }
-  
-  -- Returns a HSV color string with h between [0, 360] and s,v values between [0,100]%
-  toHSVString = _Color (cl) ->
-    h, s, v = rgbToHsv cl.r, cl.g, cl.b
-    h *= 360
-    "hsv(#{h}, #{s}%, #{v}%)"
-  
-  -- Returns a HSVA color table with h and a between [0,360] and s,v values between [0,1]
-  toHSVA = _Color (cl) ->
-    h, s, v = rgbToHsv cl.r, cl.g, cl.b
-    h *= 360
-    { :h, :s, :v, a: cl.a }
-  
-  -- Returns a HSVA color string with h and a between [0, 360] and s,v values between [0,100]%
-  toHSVAString = _Color (cl) ->
-    h, s, v = rgbToHsv cl.r, cl.g, cl.b
-    h *= 360
-    "hsva(#{h}, #{s}%, #{v}%, #{cl.a})"
-  
-  -- Returns a HSL color table with h between [0,360] and s,l values between [0,1]
-  toHSL = _Color (cl) ->
-    h, s, l = rgbToHsv cl.r, cl.g, cl.b
-    h *= 360
-    { :h, :s, :l }
-  
-  -- Returns a HSV color string with h between [0, 360] and s,v values between [0,100]%
-  toHSLString = _Color (cl) ->
-    h, s, l = rgbToHsv cl.r, cl.g, cl.b
-    h *= 360
-    "hsl(#{h}, #{s}%, #{l}%)"
-  
-  -- Returns a HSLA color table with h and a between [0,360] and s,l values between [0,1]
-  toHSLA = _Color (cl) ->
-    h, s, l = rgbToHsl cl.r, cl.g, cl.b
-    h *= 360
-    { :h, :s, :l, a: cl.a }
-  
-  -- Returns a HSVA color string with h and a between [0, 360] and s,v values between [0,100]%
-  toHSLAString = _Color (cl) ->
-    h, s, l = rgbToHsv cl.r, cl.g, cl.b
-    h *= 360
-    "hsla(#{h}, #{s}%, #{l}%, #{cl.a})"
-  
-  -- Returns a hex number (represented as decimal)
-  toHex = _Color (cl) ->
-    rr = string.format "%2.2X", cl.r
-    gg = string.format "%2.2X", cl.g
-    bb = string.format "%2.2X", cl.b
-    tonumber "0x"..rr..gg..bb
-  
-  -- Returns a hex number with alpha (represented as decimal)
-  toHex8 = _Color (cl) ->
-    rr = string.format "%2.2X", cl.r
-    gg = string.format "%2.2X", cl.g
-    bb = string.format "%2.2X", cl.b
-    aa = string.format "%2.2X", cl.a
-    tonumber "0x"..rr..gg..bb..aa
-  
-  -- Returns a 3 digit hex string
-  toHex3String = _Color (cl) ->
-    rr = (string.format "%X", cl.r)\sub 1,1
-    gg = (string.format "%X", cl.g)\sub 1,1
-    bb = (string.format "%X", cl.b)\sub 1,1
-    "#"..rr..gg..bb
-  
-  -- Returns a 4 digit hex string
-  toHex4String = _Color (cl) ->
-    rr = (string.format "%X", cl.r)\sub 1,1
-    gg = (string.format "%X", cl.g)\sub 1,1
-    bb = (string.format "%X", cl.b)\sub 1,1
-    aa = (string.format "%X", cl.a)\sub 1,1
-    "#"..rr..gg..bb..aa
-  
-  -- Returns a 6 digit hex string
-  toHex6String = _Color (cl) ->
-    rr = string.format "%2.2X", cl.r
-    gg = string.format "%2.2X", cl.g
-    bb = string.format "%2.2X", cl.b
-    "#"..rr..gg..bb
-  
-  -- Returns a 8 digit hex string
-  toHex8String = _Color (cl) ->
-    rr = string.format "%2.2X", cl.r
-    gg = string.format "%2.2X", cl.g
-    bb = string.format "%2.2X", cl.b
-    aa = string.format "%2.2X", cl.a
-    "#"..rr..gg..bb..aa
-  
-  -- Returns a RGB color table
-  toRGB = _Color (cl) -> { r: cl.r, g: cl.g, b: cl.b }
-  
-  -- Returns a RGB color string
-  toRGBString = _Color (cl) -> "rgb(#{cl.r}, #{cl.g}, #{cl.b})"
-  
-  -- Returns a RGBA color table
-  toRGBA = _Color (cl) -> { r: cl.r, g: cl.g, b: cl.b, a: cl.a }
-  
-  -- Returns a RGBA color string
-  toRGBAString = _Color (cl) -> "rgba(#{cl.r}, #{cl.g}, #{cl.b}, #{cl.a})"
-  
-  -- Returns a RGB color string in percentages
-  toRGBPercentageString = _Color (cl) -> "rgb(#{round cl.r/255*100}%, #{round cl.g/255*100}%, #{round cl.b/255*100}%)"
-  
-  -- Returns a RGBA color string in percentages
-  toRGBAPercentageString = _Color (cl) -> "rgba(#{round cl.r/255*100}%, #{round cl.g/255*100}%, #{round cl.b/255*100}%, #{round cl.a/255*100}%)"
-  
-  -- Returns a name for the color, if it can be named
-  toName = _Color (cl) -> hexNames[toHex6String cl] or false
-  
-  -- Turns a color into a string with a format.
-  toString = (fmt="hex") -> _Color (cl) ->
-    return switch fmt
-      when "rgb"         then toRGBString            cl
-      when "rgba"        then toRGBAString           cl
-      when "prgb"        then toRGBPercentageString  cl
-      when "prgba"       then toRGBAPercentageString cl
-      when "hsl"         then toHSLString            cl
-      when "hsla"        then toHSLAString           cl
-      when "hsv"         then toHSVString            cl
-      when "hsva"        then toHSVAString           cl
-      when "hex3"        then toHex3String           cl
-      when "hex4"        then toHex4String           cl
-      when "hex", "hex6" then toHex6String           cl
-      when "hex8"        then toHex8String           cl
-      when "name"        then toName                 cl
-      else                    error "toString $ format is invalid"
+toHSV = _Color (cl) ->
+  h, s, v = rgbToHsv cl.r, cl.g, cl.b
+  h *= 360
+  { :h, :s, :v }
+
+-- Returns a HSV color string with h between [0, 360] and s,v values between [0,100]%
+toHSVString = _Color (cl) ->
+  h, s, v = rgbToHsv cl.r, cl.g, cl.b
+  h *= 360
+  "hsv(#{h}, #{s}%, #{v}%)"
+
+-- Returns a HSVA color table with h and a between [0,360] and s,v values between [0,1]
+toHSVA = _Color (cl) ->
+  h, s, v = rgbToHsv cl.r, cl.g, cl.b
+  h *= 360
+  { :h, :s, :v, a: cl.a }
+
+-- Returns a HSVA color string with h and a between [0, 360] and s,v values between [0,100]%
+toHSVAString = _Color (cl) ->
+  h, s, v = rgbToHsv cl.r, cl.g, cl.b
+  h *= 360
+  "hsva(#{h}, #{s}%, #{v}%, #{cl.a})"
+
+-- Returns a HSL color table with h between [0,360] and s,l values between [0,1]
+toHSL = _Color (cl) ->
+  h, s, l = rgbToHsv cl.r, cl.g, cl.b
+  h *= 360
+  { :h, :s, :l }
+
+-- Returns a HSV color string with h between [0, 360] and s,v values between [0,100]%
+toHSLString = _Color (cl) ->
+  h, s, l = rgbToHsv cl.r, cl.g, cl.b
+  h *= 360
+  "hsl(#{h}, #{s}%, #{l}%)"
+
+-- Returns a HSLA color table with h and a between [0,360] and s,l values between [0,1]
+toHSLA = _Color (cl) ->
+  h, s, l = rgbToHsl cl.r, cl.g, cl.b
+  h *= 360
+  { :h, :s, :l, a: cl.a }
+
+-- Returns a HSVA color string with h and a between [0, 360] and s,v values between [0,100]%
+toHSLAString = _Color (cl) ->
+  h, s, l = rgbToHsv cl.r, cl.g, cl.b
+  h *= 360
+  "hsla(#{h}, #{s}%, #{l}%, #{cl.a})"
+
+-- Returns a hex number (represented as decimal)
+toHex = _Color (cl) ->
+  rr = string.format "%2.2X", cl.r
+  gg = string.format "%2.2X", cl.g
+  bb = string.format "%2.2X", cl.b
+  tonumber "0x"..rr..gg..bb
+
+-- Returns a hex number with alpha (represented as decimal)
+toHex8 = _Color (cl) ->
+  rr = string.format "%2.2X", cl.r
+  gg = string.format "%2.2X", cl.g
+  bb = string.format "%2.2X", cl.b
+  aa = string.format "%2.2X", cl.a
+  tonumber "0x"..rr..gg..bb..aa
+
+-- Returns a 3 digit hex string
+toHex3String = _Color (cl) ->
+  rr = (string.format "%X", cl.r)\sub 1,1
+  gg = (string.format "%X", cl.g)\sub 1,1
+  bb = (string.format "%X", cl.b)\sub 1,1
+  "#"..rr..gg..bb
+
+-- Returns a 4 digit hex string
+toHex4String = _Color (cl) ->
+  rr = (string.format "%X", cl.r)\sub 1,1
+  gg = (string.format "%X", cl.g)\sub 1,1
+  bb = (string.format "%X", cl.b)\sub 1,1
+  aa = (string.format "%X", cl.a)\sub 1,1
+  "#"..rr..gg..bb..aa
+
+-- Returns a 6 digit hex string
+toHex6String = _Color (cl) ->
+  rr = string.format "%2.2X", cl.r
+  gg = string.format "%2.2X", cl.g
+  bb = string.format "%2.2X", cl.b
+  "#"..rr..gg..bb
+
+-- Returns a 8 digit hex string
+toHex8String = _Color (cl) ->
+  rr = string.format "%2.2X", cl.r
+  gg = string.format "%2.2X", cl.g
+  bb = string.format "%2.2X", cl.b
+  aa = string.format "%2.2X", cl.a
+  "#"..rr..gg..bb..aa
+
+-- Returns a RGB color table
+toRGB = _Color (cl) -> { r: cl.r, g: cl.g, b: cl.b }
+
+-- Returns a RGB color string
+toRGBString = _Color (cl) -> "rgb(#{cl.r}, #{cl.g}, #{cl.b})"
+
+-- Returns a RGBA color table
+toRGBA = _Color (cl) -> { r: cl.r, g: cl.g, b: cl.b, a: cl.a }
+
+-- Returns a RGBA color string
+toRGBAString = _Color (cl) -> "rgba(#{cl.r}, #{cl.g}, #{cl.b}, #{cl.a})"
+
+-- Returns a RGB color string in percentages
+toRGBPercentageString = _Color (cl) -> "rgb(#{round cl.r/255*100}%, #{round cl.g/255*100}%, #{round cl.b/255*100}%)"
+
+-- Returns a RGBA color string in percentages
+toRGBAPercentageString = _Color (cl) -> "rgba(#{round cl.r/255*100}%, #{round cl.g/255*100}%, #{round cl.b/255*100}%, #{round cl.a/255*100}%)"
+
+-- Returns a name for the color, if it can be named
+toName = _Color (cl) -> hexNames[toHex6String cl] or false
+
+-- Turns a color into a string with a format.
+toString = (fmt="hex") -> _Color (cl) ->
+  return switch fmt
+    when "rgb"         then toRGBString            cl
+    when "rgba"        then toRGBAString           cl
+    when "prgb"        then toRGBPercentageString  cl
+    when "prgba"       then toRGBAPercentageString cl
+    when "hsl"         then toHSLString            cl
+    when "hsla"        then toHSLAString           cl
+    when "hsv"         then toHSVString            cl
+    when "hsva"        then toHSVAString           cl
+    when "hex3"        then toHex3String           cl
+    when "hex4"        then toHex4String           cl
+    when "hex", "hex6" then toHex6String           cl
+    when "hex8"        then toHex8String           cl
+    when "name"        then toName                 cl
+    else                    error "toString $ format is invalid"
+
+print "exists!", toRGBA
 
 {
   :_Color
-  :toHSV, :toHSVA, :toHSL, :toHSLA
-  :toHSVString, :toHSVAString, :toHSLString, :toHSLAString
-  :toHex, :toHex8
-  :toHex3String, :toHex4String, :toHex6String, :toHex8String
-  :toRGB, :toRGBA
-  :toRGBString, :toRGBAString, :toRGBPercentageString, :toRGBAPercentageString
-  :toName, :toString
-  :isRGB, :isRGBA, :isHSL, :isHSLA, :isHSV, :isHSVA
-  :isHex3, :isHex4, :isHex6, :isHex8
+  :toHSV,        :toHSVA,       :toHSL,                 :toHSLA
+  :toHSVString,  :toHSVAString, :toHSLString,           :toHSLAString
+  :toHex,        :toHex8
+  :toHex3String, :toHex4String, :toHex6String,          :toHex8String
+  :toRGB,        :toRGBA
+  :toRGBString,  :toRGBAString, :toRGBPercentageString, :toRGBAPercentageString
+  :toName,       :toString
+  :isRGB,        :isRGBA,       :isHSL,                 :isHSLA, :isHSV, :isHSVA
+  :isHex3,       :isHex4,       :isHex6,                :isHex8
   :cssToDecimal
-  :clamp1, :clamp255
+  :clamp1,       :clamp255
+  :round
 }
