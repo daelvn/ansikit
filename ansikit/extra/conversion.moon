@@ -25,8 +25,8 @@ words = (str) -> [word for word in str\gmatch "%S+"]
 
 -- Turns a CSS unit into a decimal number.
 cssToDecimal = (unit="") ->
-  CSS_INTEGER = "[+-]?%d+%%?"
-  CSS_NUMBER  = "[+-]?%d+%.%d+%%?"
+  CSS_INTEGER = "^[+-]?%d+%%?$"
+  CSS_NUMBER  = "^[+-]?%d+%.%d+%%?$"
   if u = unit\match CSS_INTEGER
     sign   = u\match"^[+-]"
     number = u\match"%d+"
@@ -182,114 +182,114 @@ isHex8 = (str, named=false) ->
 
 -- Returns a HSV color table with h between [0,360] and s,v values between [0,1]
 toHSV = _Color (cl) ->
-  h, s, v = rgbToHsv cl.r, cl.g, cl.b
+  h, s, v = rgbToHsv cl.raw.r, cl.raw.g, cl.raw.b
   h *= 360
   { :h, :s, :v }
 
 -- Returns a HSV color string with h between [0, 360] and s,v values between [0,100]%
 toHSVString = _Color (cl) ->
-  h, s, v = rgbToHsv cl.r, cl.g, cl.b
+  h, s, v = rgbToHsv cl.raw.r, cl.raw.g, cl.raw.b
   h *= 360
   "hsv(#{h}, #{s}%, #{v}%)"
 
 -- Returns a HSVA color table with h and a between [0,360] and s,v values between [0,1]
 toHSVA = _Color (cl) ->
-  h, s, v = rgbToHsv cl.r, cl.g, cl.b
+  h, s, v = rgbToHsv cl.raw.raw.r, cl.raw.raw.g, cl.raw.raw.b
   h *= 360
-  { :h, :s, :v, a: cl.a }
+  { :h, :s, :v, a: cl.raw.raw.a }
 
 -- Returns a HSVA color string with h and a between [0, 360] and s,v values between [0,100]%
 toHSVAString = _Color (cl) ->
-  h, s, v = rgbToHsv cl.r, cl.g, cl.b
+  h, s, v = rgbToHsv cl.raw.r, cl.raw.g, cl.raw.b
   h *= 360
-  "hsva(#{h}, #{s}%, #{v}%, #{cl.a})"
+  "hsva(#{h}, #{s}%, #{v}%, #{cl.raw.a})"
 
 -- Returns a HSL color table with h between [0,360] and s,l values between [0,1]
 toHSL = _Color (cl) ->
-  h, s, l = rgbToHsv cl.r, cl.g, cl.b
+  h, s, l = rgbToHsv cl.raw.r, cl.raw.g, cl.raw.b
   h *= 360
   { :h, :s, :l }
 
 -- Returns a HSV color string with h between [0, 360] and s,v values between [0,100]%
 toHSLString = _Color (cl) ->
-  h, s, l = rgbToHsv cl.r, cl.g, cl.b
+  h, s, l = rgbToHsv cl.raw.r, cl.raw.g, cl.raw.b
   h *= 360
   "hsl(#{h}, #{s}%, #{l}%)"
 
 -- Returns a HSLA color table with h and a between [0,360] and s,l values between [0,1]
 toHSLA = _Color (cl) ->
-  h, s, l = rgbToHsl cl.r, cl.g, cl.b
+  h, s, l = rgbToHsl cl.raw.r, cl.raw.g, cl.raw.b
   h *= 360
-  { :h, :s, :l, a: cl.a }
+  { :h, :s, :l, a: cl.raw.a }
 
 -- Returns a HSVA color string with h and a between [0, 360] and s,v values between [0,100]%
 toHSLAString = _Color (cl) ->
-  h, s, l = rgbToHsv cl.r, cl.g, cl.b
+  h, s, l = rgbToHsv cl.raw.r, cl.raw.g, cl.raw.b
   h *= 360
-  "hsla(#{h}, #{s}%, #{l}%, #{cl.a})"
+  "hsla(#{h}, #{s}%, #{l}%, #{cl.raw.a})"
 
 -- Returns a hex number (represented as decimal)
 toHex = _Color (cl) ->
-  rr = string.format "%2.2X", cl.r
-  gg = string.format "%2.2X", cl.g
-  bb = string.format "%2.2X", cl.b
+  rr = string.format "%2.2X", cl.raw.r
+  gg = string.format "%2.2X", cl.raw.g
+  bb = string.format "%2.2X", cl.raw.b
   tonumber "0x"..rr..gg..bb
 
 -- Returns a hex number with alpha (represented as decimal)
 toHex8 = _Color (cl) ->
-  rr = string.format "%2.2X", cl.r
-  gg = string.format "%2.2X", cl.g
-  bb = string.format "%2.2X", cl.b
-  aa = string.format "%2.2X", cl.a
+  rr = string.format "%2.2X", cl.raw.r
+  gg = string.format "%2.2X", cl.raw.g
+  bb = string.format "%2.2X", cl.raw.b
+  aa = string.format "%2.2X", cl.raw.a
   tonumber "0x"..rr..gg..bb..aa
 
 -- Returns a 3 digit hex string
 toHex3String = _Color (cl) ->
-  rr = (string.format "%X", cl.r)\sub 1,1
-  gg = (string.format "%X", cl.g)\sub 1,1
-  bb = (string.format "%X", cl.b)\sub 1,1
+  rr = (string.format "%X", cl.raw.r)\sub 1,1
+  gg = (string.format "%X", cl.raw.g)\sub 1,1
+  bb = (string.format "%X", cl.raw.b)\sub 1,1
   "#"..rr..gg..bb
 
 -- Returns a 4 digit hex string
 toHex4String = _Color (cl) ->
-  rr = (string.format "%X", cl.r)\sub 1,1
-  gg = (string.format "%X", cl.g)\sub 1,1
-  bb = (string.format "%X", cl.b)\sub 1,1
-  aa = (string.format "%X", cl.a)\sub 1,1
+  rr = (string.format "%X", cl.raw.r)\sub 1,1
+  gg = (string.format "%X", cl.raw.g)\sub 1,1
+  bb = (string.format "%X", cl.raw.b)\sub 1,1
+  aa = (string.format "%X", cl.raw.a)\sub 1,1
   "#"..rr..gg..bb..aa
 
 -- Returns a 6 digit hex string
 toHex6String = _Color (cl) ->
-  rr = string.format "%2.2X", cl.r
-  gg = string.format "%2.2X", cl.g
-  bb = string.format "%2.2X", cl.b
+  rr = string.format "%2.2X", cl.raw.r
+  gg = string.format "%2.2X", cl.raw.g
+  bb = string.format "%2.2X", cl.raw.b
   "#"..rr..gg..bb
 
 -- Returns a 8 digit hex string
 toHex8String = _Color (cl) ->
-  rr = string.format "%2.2X", cl.r
-  gg = string.format "%2.2X", cl.g
-  bb = string.format "%2.2X", cl.b
-  aa = string.format "%2.2X", cl.a
+  rr = string.format "%2.2X", cl.raw.r
+  gg = string.format "%2.2X", cl.raw.g
+  bb = string.format "%2.2X", cl.raw.b
+  aa = string.format "%2.2X", cl.raw.a
   "#"..rr..gg..bb..aa
 
 -- Returns a RGB color table
-toRGB = _Color (cl) -> { r: cl.r, g: cl.g, b: cl.b }
+toRGB = _Color (cl) -> { r: cl.raw.r, g: cl.raw.g, b: cl.raw.b }
 
 -- Returns a RGB color string
-toRGBString = _Color (cl) -> "rgb(#{cl.r}, #{cl.g}, #{cl.b})"
+toRGBString = _Color (cl) -> "rgb(#{cl.raw.r}, #{cl.raw.g}, #{cl.raw.b})"
 
 -- Returns a RGBA color table
-toRGBA = _Color (cl) -> { r: cl.r, g: cl.g, b: cl.b, a: cl.a }
+toRGBA = _Color (cl) -> { r: cl.raw.r, g: cl.raw.g, b: cl.raw.b, a: cl.raw.a }
 
 -- Returns a RGBA color string
-toRGBAString = _Color (cl) -> "rgba(#{cl.r}, #{cl.g}, #{cl.b}, #{cl.a})"
+toRGBAString = _Color (cl) -> "rgba(#{cl.raw.r}, #{cl.raw.g}, #{cl.raw.b}, #{cl.raw.a})"
 
 -- Returns a RGB color string in percentages
-toRGBPercentageString = _Color (cl) -> "rgb(#{round cl.r/255*100}%, #{round cl.g/255*100}%, #{round cl.b/255*100}%)"
+toRGBPercentageString = _Color (cl) -> "rgb(#{round cl.raw.r/255*100}%, #{round cl.raw.g/255*100}%, #{round cl.raw.b/255*100}%)"
 
 -- Returns a RGBA color string in percentages
-toRGBAPercentageString = _Color (cl) -> "rgba(#{round cl.r/255*100}%, #{round cl.g/255*100}%, #{round cl.b/255*100}%, #{round cl.a/255*100}%)"
+toRGBAPercentageString = _Color (cl) -> "rgba(#{round cl.raw.r/255*100}%, #{round cl.raw.g/255*100}%, #{round cl.raw.b/255*100}%, #{round cl.raw.a/255*100}%)"
 
 -- Returns a name for the color, if it can be named
 toName = _Color (cl) -> hexNames[toHex6String cl] or false
@@ -311,8 +311,6 @@ toString = (fmt="hex") -> _Color (cl) ->
     when "hex8"        then toHex8String           cl
     when "name"        then toName                 cl
     else                    error "toString $ format is invalid"
-
-print "exists!", toRGBA
 
 {
   :_Color

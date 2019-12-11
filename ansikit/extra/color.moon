@@ -13,9 +13,6 @@ import
   cssToDecimal, clamp1, clamp255, round
   _Color
 from require "ansikit.extra.conversion"
-io.stdin\setvbuf "no"
-print "toRGBA", toRGBA
-print "isHSL",  isHSL
 type                                             = require "typical"
 i                                                = require "inspect"
 tee_count                                        = 0
@@ -42,7 +39,7 @@ parseColor = (color) ->
       with string.lower color -- trim spaces & turn into lowercase
         color = \gsub "^%s+", ""
         color = \gsub "%s+$", ""
-    when "table", "Color"
+    when "table"
       color = unparseColor color
 
   -- check if a name was used
@@ -135,17 +132,13 @@ clone = _Color (cl) -> Color toString cl
 
 -- Desaturate
 desaturate = _Color (cl) -> (amount=10) ->
-  hsva    = tee toHSVA cl
+  hsva    = toHSVA cl
   hsva.s -= amount / 100
   hsva.s  = clamp1 hsva.s
   Color hsva
 
 darkblue = Color "hsva 250 50% 50% 255"
---print "Color",       i darkblue
-print "_RGBA",       i _toRGBA tee unparseColor darkblue
-print "RGBA",        i toRGBA darkblue
-print "HSVA",        i toHSVA darkblue
-print "Desaturated", i (desaturate darkblue) 10
+print "Desaturated", i toHSVA (desaturate darkblue) 10
 
 {
   :names, :hexNames
