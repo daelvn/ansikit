@@ -5,7 +5,6 @@ import Palette                     from require "ansikit.palette"
 import Color, hexToRGB, background from require "ansikit.color"
 hex = hexToRGB
 
-i = require "inspect"
 
 colors = Palette "CraftOS", {k, background v for k, v in pairs {
   white:     Color hex 0xF0F0F0

@@ -9,7 +9,6 @@ CSI = Sequence 27
 
 -- Clearing functions
 erase = CSI "J"
-clear = erase
 
 eraseFromCursor = -> erase "0"
 eraseToCursor   = -> erase "1"

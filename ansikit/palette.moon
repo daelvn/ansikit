@@ -1,8 +1,8 @@
 -- ansikit.palette
 -- Makes palettes out of colors.
 -- By daelvn
-type                               = require "typical"
-import reset, Bit4, Bit8, Bit24 from require "ansikit.color"
+type                 = require "typical"
+import Bit4, Bit8 from require "ansikit.color"
 
 -- Bit4 collection
 color4 = {
@@ -49,9 +49,9 @@ color4 = {
 -- Use as color8._255 or color8.bg._255
 color8 = setmetatable {}, __index: (idx) =>
   if idx == "bg"
-    return setmetatable {}, __index (idx) =>
-      if ("string" == type idx) and idx\match "^_"
-        return Bit8 (idx\match "_(%d+)"), true
+    return setmetatable {}, __index: (idxx) =>
+      if ("string" == type idxx) and idxx\match "^_"
+        return Bit8 (idxx\match "_(%d+)"), true
       else
         return nil
   elseif ("string" == type idx) and idx\match "^_"

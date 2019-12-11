@@ -21,7 +21,7 @@ cursorSetColumn  = _curmov (n) -> (CSI "G") n
 -- Cursor position
 _curpos             = => (x=1, y=1) -> @ (tostring x), (tostring y)
 cursorSetPosition   = _curpos (x, y) -> (CSI "H") x, y
-cursorSetPosition1  = (x) -> (y) -> cursorPosition x, y
+cursorSetPosition1  = (x) -> (y) -> cursorSetPosition x, y
 
 cursorSave    = -> (CSI "s")!
 cursorRestore = -> (CSI "u")!
