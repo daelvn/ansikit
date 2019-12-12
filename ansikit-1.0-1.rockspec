@@ -6,7 +6,7 @@ source  = {
 }
 description = {
   summary = "Use ANSI escape sequences easily.",
-  description = [[
+  detailed = [[
     ansikit lets you use ANSI escape sequences
     for color, text styling, cursor movement
     and other functionality in an easy to use
@@ -19,7 +19,7 @@ dependencies = {
   "guardia >= 3.0.3"
 }
 build = {
-  type = "builtin"
+  type = "builtin",
   modules = {
     ["ansikit.color"] = "ansikit/color.lua",
     ["ansikit.cursor"] = "ansikit/cursor.lua",
