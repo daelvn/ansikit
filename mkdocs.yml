@@ -40,3 +40,6 @@ nav:
     - 'ansikit.sequence': 'module/sequence.md'
     - 'ansikit.style': 'module/style.md'
     - 'ansikit.text': 'module/text.md'
+  - Manual:
+    - 'Basics': 'manual/basics.md'
+    - 'Colors': 'manual/colors.md'

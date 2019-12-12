@@ -33,9 +33,16 @@ Clears everything currently displayed.
 ## eraseFullScreen
 
 **Signature →** `nil`<br>
-**Alias →** `clearFullScreen`<br>
+**Alias →** `clearFullScreen`, `eraseAll`, `clearAll`<br>
 
 Clears everything currently displayed and in the scrollback buffer.
+
+## erase
+
+**Signature →** `(string) -> nil`<br>
+**Alias →** `clear`<br>
+
+Takes a direction between `screen`, `all`, `fromcursor` and `tocursor` and erases it.
 
 ## scrollUp
 
@@ -48,3 +55,9 @@ Scrolls up page by `n` lines. `n` defaults to 1.
 **Signature →** `([number]) -> nil`<br>
 
 Scrolls down page by `n` lines. `n` defaults to 1.
+
+## scroll
+
+**Signature →** `(string, [number]) -> nil`<br>
+
+Scrolls page in direction `up` or `down` by `n` lines. `n` defaults to 1.
