@@ -68,7 +68,40 @@ cursorSetPosition 0,0
 
 You can also save and restore a cursor position with [`cursorSave`](/module/cursor/#cursorSave) and [`cursorRestore`](/module/cursor/#cursorRestore).
 
+## Text styles
 
+You can use text styles directly from [`ansikit.text`](/module/text/), and you can find the full list of styles in there.
 
+To use them, you just concatenate them to your string. Remember to use `text.reset` at the end so it doesn't overflow into other text!
 
+```lua tab="Lua"
+text = require "ansikit.text"
+print text.bold .. "hello" .. text.reset
+```
 
+```moonscript tab="MoonScript"
+import bold, reset from require "ansikit.text"
+print "#{bold}hello#{reset}"
+```
+
+## Color basics
+
+To use traditional ANSI escape codes, instead of boilerplate added by `ansikit` for color management, you can use the functions [`Bit4`](/module/color/#Bit4) for traditional ANSI escape sequences, [`Bit8`](/module/color/#Bit8) for 255-indexed and [`Bit24`](/module/color/#Bit24) for true color. These will generate strings you can concatenate to your strings to color them.
+
+```lua tab="Lua'
+print Bit4(91, 46) .. "bright red text and cyan bg" .. reset
+print Bit8(226, true) .. "yellow background" .. reset
+print Bit24(255,255,255,true) .. "rgb white background" .. reset
+```
+
+```moonscript tab="MoonScript"
+print "#{Bit4 91, 46}bright red text and cyan bg#{reset}"
+print "#{Bit8 226, true}yellow background#{reset}"
+print "#{Bit24 255,255,255, true}rgb white background#{reset}"
+```
+
+But often, you will want to use something simpler, in which case, [`ansikit.style`](/module/style/) implements [ansicolors.lua](https://github.com/kikito/ansicolors.lua) and [`Chalk`](https://github.com/Desvelao/chalk) clones. You can read more about them in the link to `ansikit.style`.
+
+## Conclusion
+
+All of this pretty much covers the basics of ansikit, and the next tutorial covers more on managing colors.

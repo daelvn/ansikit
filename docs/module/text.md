@@ -9,6 +9,26 @@ source: text.moon
 
 Text styling escape codes.
 
+## Full list of styles
+
+- reset
+- bold
+- faint
+- italic
+- underline
+- double underline
+- slow blink
+- rapid blink
+- reverse
+- conceal
+- strikethrough
+- ANSI fonts
+- fraktur
+- framed
+- overline
+
+See this page for more details on each.
+
 ## reset
 
 Resets all text styling.
