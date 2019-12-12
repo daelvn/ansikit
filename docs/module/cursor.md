@@ -51,6 +51,12 @@ Moves the cursor to the previous `n` lines. `n` defaults to 1.
 
 Moves the cursor to column `n`. `n` defaults to 1.
 
+## cursorMove
+
+**Signature →** `(string, [number]) -> nil`<br>
+
+Takes a direction from `up`, `down`, `forward`, `back`, `nextline`, `previousline`, `column` and moves `n` in that direction. `n` defaults to 1.
+
 ## cursorSetPosition
 
 **Signature →** `(number, number) -> nil`<br>

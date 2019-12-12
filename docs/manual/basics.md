@@ -54,6 +54,20 @@ To clear a part of the screen, or the whole thing, you might want to use the [`c
 
 To scroll, you can use the [`scroll`](/module/page/#scroll) function, which takes a direction from `up` and `down` and a number of lines to scroll, which defaults to 1.
 
+To move the cursor, you would use two methods, [`cursorMove`](/module/cursor/#cursorMove) to move relatively and [`cursorSetPosition`](/module/cursor/#cursorSetPosition) to move absolutely.
+
+```lua tab="Lua"
+cursorMove("down", 5)
+cursorSetPosition(0,0)
+```
+
+```moonscript tab="MoonScript'
+cursorMove "down", 5
+cursorSetPosition 0,0
+```
+
+You can also save and restore a cursor position with [`cursorSave`](/module/cursor/#cursorSave) and [`cursorRestore`](/module/cursor/#cursorRestore).
+
 
 
 

@@ -18,6 +18,16 @@ cursorNextLn     = _curmov (n) -> (CSI "E") n
 cursorPreviousLn = _curmov (n) -> (CSI "F") n
 cursorSetColumn  = _curmov (n) -> (CSI "G") n
 
+cursorMove = (direction, n) -> switch direction
+  when "up"           then cursorUp n
+  when "down"         then cursorDown n
+  when "forward"      then cursorForward n
+  when "back"         then cursorBack n
+  when "nextline"     then cursorNextLn n
+  when "previousline" then cursorPreviousLn n
+  when "column"       then cursorSetColumn n
+  else                     cursorForward n
+
 -- Cursor position
 _curpos             = => (x=1, y=1) -> @ (tostring x), (tostring y)
 cursorSetPosition   = _curpos (x, y) -> (CSI "H") x, y
@@ -38,4 +48,6 @@ cursorRestore = -> (CSI "u")!
   :cursorSetPosition1
   :cursorSave
   :cursorRestore
+
+  :cursorMove
 }
