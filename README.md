@@ -4,8 +4,19 @@ A library for usual ANSI codes, with some extended capabilities like a color pal
 
 ## Installation
 
+You can install the library with [LuaRocks](https://luarocks.org/).
+
 ```
 $ luarocks install ansikit
+```
+
+This will make all modules available to you.
+
+LuaRocks should automatically install dependencies for the module, but otherwise, feel free to manually download [typical](https://github.com/hoelzro/lua-typical) and [guardia](https://github.com/daelvn/guardia).
+
+```
+$ luarocks install typical
+$ luarocks install guardia
 ```
 
 ## License

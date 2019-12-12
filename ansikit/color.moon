@@ -18,8 +18,8 @@ Bit24 = (r=0, g=0, b=0, bg=false) -> SGR (bg and 48 or 38), 2, r, g, b
 -- RGB representation
 -- print (Color 255, 255, 255) -- white ansi code
 Color = (r=0, g=0, b=0, bg=false) -> setmetatable {:r, :g, :b, :bg}, {
-  __type:     "Color"
-  __tostring:     => Bit24 @r, @g, @b, @bg
+  __type:          "Color"
+  __tostring:      => Bit24 @r, @g, @b, @bg
   __concat:   (b_) =>
     if "Color" == type b_
       (tostring @) .. (tostring b_)

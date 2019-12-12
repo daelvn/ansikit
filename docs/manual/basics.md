@@ -12,6 +12,14 @@ $ luarocks install ansikit
 
 This will make all modules available to you.
 
+LuaRocks should automatically install dependencies for the module, but otherwise, feel free to manually download [typical](https://github.com/hoelzro/lua-typical) and [guardia](https://github.com/daelvn/guardia).
+
+```
+$ luarocks install typical
+$ luarocks install guardia
+```
+
+
 ## Usage
 
 ansikit is split in several modules that provide grouped functionality, letting you import only what you need. All modules return a table with the named exported values, as is conventional.
@@ -34,7 +42,7 @@ You can form basic escape sequences using the [Sequence](/module/sequence/#Seque
 
 ### Example
 
-```lua tab="Lua'
+```lua tab="Lua"
 SGR   = Sequence(27, "m")
 reset = SGR(0, 1) -- string.char(27) .. "[0;1" .. "m"
 ```
@@ -61,7 +69,7 @@ cursorMove("down", 5)
 cursorSetPosition(0,0)
 ```
 
-```moonscript tab="MoonScript'
+```moonscript tab="MoonScript"
 cursorMove "down", 5
 cursorSetPosition 0,0
 ```
@@ -88,7 +96,7 @@ print "#{bold}hello#{reset}"
 
 To use traditional ANSI escape codes, instead of boilerplate added by `ansikit` for color management, you can use the functions [`Bit4`](/module/color/#Bit4) for traditional ANSI escape sequences, [`Bit8`](/module/color/#Bit8) for 255-indexed and [`Bit24`](/module/color/#Bit24) for true color. These will generate strings you can concatenate to your strings to color them.
 
-```lua tab="Lua'
+```lua tab="Lua"
 print Bit4(91, 46) .. "bright red text and cyan bg" .. reset
 print Bit8(226, true) .. "yellow background" .. reset
 print Bit24(255,255,255,true) .. "rgb white background" .. reset
