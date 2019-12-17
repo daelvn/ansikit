@@ -212,6 +212,19 @@
   
 
       
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../manual/basics/" class="md-tabs__link">
+          Manual
+        </a>
+      
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -385,6 +398,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#erase" class="md-nav__link">
+    erase
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#scrollup" class="md-nav__link">
     scrollUp
   </a>
@@ -394,6 +414,13 @@
         <li class="md-nav__item">
   <a href="#scrolldown" class="md-nav__link">
     scrollDown
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scroll" class="md-nav__link">
+    scroll
   </a>
   
 </li>
@@ -480,6 +507,54 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Manual
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Manual
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/basics/" title="Basics" class="md-nav__link">
+      Basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/colors/" title="Colors" class="md-nav__link">
+      Colors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -529,6 +604,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#erase" class="md-nav__link">
+    erase
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#scrollup" class="md-nav__link">
     scrollUp
   </a>
@@ -538,6 +620,13 @@
         <li class="md-nav__item">
   <a href="#scrolldown" class="md-nav__link">
     scrollDown
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scroll" class="md-nav__link">
+    scroll
   </a>
   
 </li>
@@ -583,14 +672,21 @@
 <p>Clears everything currently displayed.</p>
 <h2 id="erasefullscreen">eraseFullScreen<a class="headerlink" href="#erasefullscreen" title="Permanent link">&para;</a></h2>
 <p><strong>Signature →</strong> <code class="codehilite"><span class="err">nil</span></code><br>
-<strong>Alias →</strong> <code class="codehilite"><span class="err">clearFullScreen</span></code><br></p>
+<strong>Alias →</strong> <code class="codehilite"><span class="err">clearFullScreen</span></code>, <code class="codehilite"><span class="err">eraseAll</span></code>, <code class="codehilite"><span class="err">clearAll</span></code><br></p>
 <p>Clears everything currently displayed and in the scrollback buffer.</p>
+<h2 id="erase">erase<a class="headerlink" href="#erase" title="Permanent link">&para;</a></h2>
+<p><strong>Signature →</strong> <code class="codehilite"><span class="err">(string) -&gt; nil</span></code><br>
+<strong>Alias →</strong> <code class="codehilite"><span class="err">clear</span></code><br></p>
+<p>Takes a direction between <code class="codehilite"><span class="err">screen</span></code>, <code class="codehilite"><span class="err">all</span></code>, <code class="codehilite"><span class="err">fromcursor</span></code> and <code class="codehilite"><span class="err">tocursor</span></code> and erases it.</p>
 <h2 id="scrollup">scrollUp<a class="headerlink" href="#scrollup" title="Permanent link">&para;</a></h2>
 <p><strong>Signature →</strong> <code class="codehilite"><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">nil</span><span class="w"></span></code><br></p>
 <p>Scrolls up page by <code class="codehilite"><span class="err">n</span></code> lines. <code class="codehilite"><span class="err">n</span></code> defaults to 1.</p>
 <h2 id="scrolldown">scrollDown<a class="headerlink" href="#scrolldown" title="Permanent link">&para;</a></h2>
 <p><strong>Signature →</strong> <code class="codehilite"><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">nil</span><span class="w"></span></code><br></p>
 <p>Scrolls down page by <code class="codehilite"><span class="err">n</span></code> lines. <code class="codehilite"><span class="err">n</span></code> defaults to 1.</p>
+<h2 id="scroll">scroll<a class="headerlink" href="#scroll" title="Permanent link">&para;</a></h2>
+<p><strong>Signature →</strong> <code class="codehilite"><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">nil</span><span class="w"></span></code><br></p>
+<p>Scrolls page in direction <code class="codehilite"><span class="err">up</span></code> or <code class="codehilite"><span class="err">down</span></code> by <code class="codehilite"><span class="err">n</span></code> lines. <code class="codehilite"><span class="err">n</span></code> defaults to 1.</p>
                 
                   
                     <h2 id="__source">Source</h2>

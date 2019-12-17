@@ -208,6 +208,19 @@
   
 
       
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="manual/basics/" class="md-tabs__link">
+          Manual
+        </a>
+      
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -454,6 +467,54 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Manual
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Manual
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="manual/basics/" title="Basics" class="md-nav__link">
+      Basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="manual/colors/" title="Colors" class="md-nav__link">
+      Colors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -524,7 +585,14 @@
                 <h1 id="ansikit-ansi-code-toolkit-for-lua">ansikit - ANSI code toolkit for Lua<a class="headerlink" href="#ansikit-ansi-code-toolkit-for-lua" title="Permanent link">&para;</a></h1>
 <p>A library for usual ANSI codes, with some extended capabilities like a color palette library or styling functions. It is written in MoonScript but plays nice with Lua.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>You can install the library with <a href="https://luarocks.org/">LuaRocks</a>.</p>
 <div class="codehilite"><pre><span></span>$ luarocks install ansikit
+</pre></div>
+
+<p>This will make all modules available to you.</p>
+<p>LuaRocks should automatically install dependencies for the module, but otherwise, feel free to manually download <a href="https://github.com/hoelzro/lua-typical">typical</a> and <a href="https://github.com/daelvn/guardia">guardia</a>.</p>
+<div class="codehilite"><pre><span></span>$ luarocks install typical
+$ luarocks install guardia
 </pre></div>
 
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>

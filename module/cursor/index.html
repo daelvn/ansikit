@@ -212,6 +212,19 @@
   
 
       
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../manual/basics/" class="md-tabs__link">
+          Manual
+        </a>
+      
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -394,6 +407,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#cursormove" class="md-nav__link">
+    cursorMove
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cursorsetposition" class="md-nav__link">
     cursorSetPosition
   </a>
@@ -515,6 +535,54 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Manual
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Manual
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/basics/" title="Basics" class="md-nav__link">
+      Basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/colors/" title="Colors" class="md-nav__link">
+      Colors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -580,6 +648,13 @@
         <li class="md-nav__item">
   <a href="#cursorsetcolumn" class="md-nav__link">
     cursorSetColumn
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cursormove" class="md-nav__link">
+    cursorMove
   </a>
   
 </li>
@@ -660,6 +735,9 @@
 <h2 id="cursorsetcolumn">cursorSetColumn<a class="headerlink" href="#cursorsetcolumn" title="Permanent link">&para;</a></h2>
 <p><strong>Signature →</strong> <code class="codehilite"><span class="p">(</span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">nil</span><span class="w"></span></code><br></p>
 <p>Moves the cursor to column <code class="codehilite"><span class="err">n</span></code>. <code class="codehilite"><span class="err">n</span></code> defaults to 1.</p>
+<h2 id="cursormove">cursorMove<a class="headerlink" href="#cursormove" title="Permanent link">&para;</a></h2>
+<p><strong>Signature →</strong> <code class="codehilite"><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="o">[</span><span class="n">number</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">nil</span><span class="w"></span></code><br></p>
+<p>Takes a direction from <code class="codehilite"><span class="err">up</span></code>, <code class="codehilite"><span class="err">down</span></code>, <code class="codehilite"><span class="err">forward</span></code>, <code class="codehilite"><span class="err">back</span></code>, <code class="codehilite"><span class="err">nextline</span></code>, <code class="codehilite"><span class="err">previousline</span></code>, <code class="codehilite"><span class="err">column</span></code> and moves <code class="codehilite"><span class="err">n</span></code> in that direction. <code class="codehilite"><span class="err">n</span></code> defaults to 1.</p>
 <h2 id="cursorsetposition">cursorSetPosition<a class="headerlink" href="#cursorsetposition" title="Permanent link">&para;</a></h2>
 <p><strong>Signature →</strong> <code class="codehilite"><span class="err">(number, number) -&gt; nil</span></code><br></p>
 <p>Sets the cursor position to <code class="codehilite"><span class="err">x</span></code> and <code class="codehilite"><span class="err">y</span></code>.</p>

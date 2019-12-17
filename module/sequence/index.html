@@ -212,6 +212,19 @@
   
 
       
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../manual/basics/" class="md-tabs__link">
+          Manual
+        </a>
+      
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -399,6 +412,27 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#sgr" class="md-nav__link">
+    SGR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resgr" class="md-nav__link">
+    reSGR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unparsesgr" class="md-nav__link">
+    unparseSGR
+  </a>
+  
+</li>
+      
       
         <li class="md-nav__item">
           <a href="#__source" class="md-nav__link md-nav__link--active">
@@ -445,6 +479,54 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Manual
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Manual
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/basics/" title="Basics" class="md-nav__link">
+      Basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/colors/" title="Colors" class="md-nav__link">
+      Colors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -468,6 +550,27 @@
         <li class="md-nav__item">
   <a href="#sequence" class="md-nav__link">
     Sequence
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sgr" class="md-nav__link">
+    SGR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resgr" class="md-nav__link">
+    reSGR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unparsesgr" class="md-nav__link">
+    unparseSGR
   </a>
   
 </li>
@@ -514,6 +617,14 @@
 <span class="n">color</span><span class="p">(</span><span class="mi">38</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span> <span class="c1">-- ^[38;2;255;255;255m</span>
 </pre></div></div>
 </div>
+<h2 id="sgr">SGR<a class="headerlink" href="#sgr" title="Permanent link">&para;</a></h2>
+<p><a href="#Sequence"><code class="codehilite"><span class="err">Sequence</span></code></a> with the arguments <code class="codehilite"><span class="err">27</span></code> and <code class="codehilite"><span class="err">&quot;m&quot;</span></code> passed in.</p>
+<h2 id="resgr">reSGR<a class="headerlink" href="#resgr" title="Permanent link">&para;</a></h2>
+<p><strong>Pattern →</strong> <code class="codehilite"><span class="err">string.char(27)..&quot;%[(%d+)&lt;&lt;m</span></code></p>
+<p>A string that holds a pattern to match a <code class="codehilite"><span class="err">SGR</span></code> sequence of up to 3 parameters.</p>
+<h2 id="unparsesgr">unparseSGR<a class="headerlink" href="#unparsesgr" title="Permanent link">&para;</a></h2>
+<p><strong>Signature →</strong> <code class="codehilite"><span class="err">(string) -&gt; ...</span></code><br></p>
+<p>Takes an ANSI sequence and uses <a href="#reSGR"><code class="codehilite"><span class="err">reSGR</span></code></a> to return up to 3 digit matches in the sequence.</p>
                 
                   
                     <h2 id="__source">Source</h2>

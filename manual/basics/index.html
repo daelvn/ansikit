@@ -1,0 +1,836 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.5.1">
+    
+    
+      
+        <title>Basics - ansikit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ef5350">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="red" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#basics-in-ansikit" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="ansikit" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">spellcheck</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              ansikit
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Basics
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/daelvn/ansikit/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    daelvn/ansikit
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../module/color/" class="md-tabs__link">
+          Modules
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" class="md-tabs__link md-tabs__link--active">
+          Manual
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="ansikit" class="md-nav__button md-logo">
+      
+        <i class="md-icon">spellcheck</i>
+      
+    </a>
+    ansikit
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/daelvn/ansikit/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    daelvn/ansikit
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../changelog/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Modules
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Modules
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../module/color/" title="ansikit.color" class="md-nav__link">
+      ansikit.color
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../module/cursor/" title="ansikit.cursor" class="md-nav__link">
+      ansikit.cursor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../module/page/" title="ansikit.page" class="md-nav__link">
+      ansikit.page
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../module/paint/" title="ansikit.paint" class="md-nav__link">
+      ansikit.paint
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../module/palette/" title="ansikit.palette" class="md-nav__link">
+      ansikit.palette
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../module/sequence/" title="ansikit.sequence" class="md-nav__link">
+      ansikit.sequence
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../module/style/" title="ansikit.style" class="md-nav__link">
+      ansikit.style
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../module/text/" title="ansikit.text" class="md-nav__link">
+      ansikit.text
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Manual
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Manual
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Basics
+      </label>
+    
+    <a href="./" title="Basics" class="md-nav__link md-nav__link--active">
+      Basics
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-sequences" class="md-nav__link">
+    Basic sequences
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cursor-and-page-manipulation" class="md-nav__link">
+    Cursor and page manipulation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#text-styles" class="md-nav__link">
+    Text styles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color-basics" class="md-nav__link">
+    Color basics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../colors/" title="Colors" class="md-nav__link">
+      Colors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-sequences" class="md-nav__link">
+    Basic sequences
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cursor-and-page-manipulation" class="md-nav__link">
+    Cursor and page manipulation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#text-styles" class="md-nav__link">
+    Text styles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#color-basics" class="md-nav__link">
+    Color basics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/daelvn/ansikit/edit/master/docs/manual/basics.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="basics-in-ansikit">Basics in ansikit<a class="headerlink" href="#basics-in-ansikit" title="Permanent link">&para;</a></h1>
+<p>This tutorial covers the basics of ansikit. Just enough to get you started with the library.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>You can install the library with <a href="https://luarocks.org/">LuaRocks</a>.</p>
+<div class="codehilite"><pre><span></span>$ luarocks install ansikit
+</pre></div>
+
+<p>This will make all modules available to you.</p>
+<p>LuaRocks should automatically install dependencies for the module, but otherwise, feel free to manually download <a href="https://github.com/hoelzro/lua-typical">typical</a> and <a href="https://github.com/daelvn/guardia">guardia</a>.</p>
+<div class="codehilite"><pre><span></span>$ luarocks install typical
+$ luarocks install guardia
+</pre></div>
+
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p>ansikit is split in several modules that provide grouped functionality, letting you import only what you need. All modules return a table with the named exported values, as is conventional.</p>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">Lua</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="nb">require</span> <span class="s2">&quot;ansikit.text&quot;</span>
+<span class="nb">print</span> <span class="n">text</span><span class="p">.</span><span class="n">bold</span> <span class="o">..</span> <span class="s2">&quot;hello&quot;</span> <span class="o">..</span> <span class="n">text</span><span class="p">.</span><span class="n">reset</span>
+</pre></div></div>
+<input name="__tabs_1" type="radio" id="__tab_1_1" />
+<label for="__tab_1_1">MoonScript</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="k">import</span> <span class="n">bold</span><span class="p">,</span> <span class="n">reset</span> <span class="k">from</span> <span class="nb">require</span> <span class="s2">&quot;</span><span class="s">ansikit.text</span><span class="s2">&quot;</span>
+<span class="nb">print</span> <span class="s2">&quot;</span><span class="s">#{bold}hello#{reset}</span><span class="s2">&quot;</span>
+</pre></div></div>
+</div>
+<h2 id="basic-sequences">Basic sequences<a class="headerlink" href="#basic-sequences" title="Permanent link">&para;</a></h2>
+<p>You can form basic escape sequences using the <a href="/module/sequence/#Sequence">Sequence</a> function in <code class="codehilite"><span class="err">ansikit.sequence</span></code>. It takes a start character <code class="codehilite"><span class="err">sb</span></code> and a trailing character <code class="codehilite"><span class="err">tb</span></code> that defaults to an empty string.  Passing those will produce a function that takes arguments and returns an escape sequence.</p>
+<h3 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h3>
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">Lua</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="n">SGR</span>   <span class="o">=</span> <span class="n">Sequence</span><span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="s2">&quot;m&quot;</span><span class="p">)</span>
+<span class="n">reset</span> <span class="o">=</span> <span class="n">SGR</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">-- string.char(27) .. &quot;[0;1&quot; .. &quot;m&quot;</span>
+</pre></div></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">MoonScript</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="nc">SGR</span>   <span class="o">=</span> <span class="nc">Sequence</span> <span class="mi">27</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">m</span><span class="s2">&quot;</span>
+<span class="n">reset</span> <span class="o">=</span> <span class="nc">SGR</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">-- (string.char 27) .. &quot;[0;1&quot; .. &quot;m&quot;</span>
+</pre></div></div>
+</div>
+<p>The <a href="/module/sequence/#SGR">SGR</a> function is already provided as a part of <code class="codehilite"><span class="err">ansikit.sequence</span></code>.</p>
+<h2 id="cursor-and-page-manipulation">Cursor and page manipulation<a class="headerlink" href="#cursor-and-page-manipulation" title="Permanent link">&para;</a></h2>
+<p>You can use predefined ANSI escape sequences that will let you clear your screen, scroll up/down, change cursor position, etc. All the functions are documented in the <a href="/module/page/"><code class="codehilite"><span class="err">ansikit.page</span></code> module page</a>, and here we will only cover what you might use the most.</p>
+<p>To clear a part of the screen, or the whole thing, you might want to use the <a href="/module/page/#erase"><code class="codehilite"><span class="err">clear</span></code></a> function. It takes a direction between <code class="codehilite"><span class="err">screen</span></code> (all that is displayed), <code class="codehilite"><span class="err">all</span></code> (includes buffer), <code class="codehilite"><span class="err">fromcursor</span></code> (all from cursor), and <code class="codehilite"><span class="err">tocursor</span></code> (all until cursor).</p>
+<p>To scroll, you can use the <a href="/module/page/#scroll"><code class="codehilite"><span class="err">scroll</span></code></a> function, which takes a direction from <code class="codehilite"><span class="err">up</span></code> and <code class="codehilite"><span class="err">down</span></code> and a number of lines to scroll, which defaults to 1.</p>
+<p>To move the cursor, you would use two methods, <a href="/module/cursor/#cursorMove"><code class="codehilite"><span class="err">cursorMove</span></code></a> to move relatively and <a href="/module/cursor/#cursorSetPosition"><code class="codehilite"><span class="err">cursorSetPosition</span></code></a> to move absolutely.</p>
+<div class="superfences-tabs">
+<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
+<label for="__tab_3_0">Lua</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="n">cursorMove</span><span class="p">(</span><span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">cursorSetPosition</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</pre></div></div>
+<input name="__tabs_3" type="radio" id="__tab_3_1" />
+<label for="__tab_3_1">MoonScript</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="n">cursorMove</span> <span class="s2">&quot;</span><span class="s">down</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">5</span>
+<span class="n">cursorSetPosition</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
+</pre></div></div>
+</div>
+<p>You can also save and restore a cursor position with <a href="/module/cursor/#cursorSave"><code class="codehilite"><span class="err">cursorSave</span></code></a> and <a href="/module/cursor/#cursorRestore"><code class="codehilite"><span class="err">cursorRestore</span></code></a>.</p>
+<h2 id="text-styles">Text styles<a class="headerlink" href="#text-styles" title="Permanent link">&para;</a></h2>
+<p>You can use text styles directly from <a href="/module/text/"><code class="codehilite"><span class="err">ansikit.text</span></code></a>, and you can find the full list of styles in there.</p>
+<p>To use them, you just concatenate them to your string. Remember to use <code class="codehilite"><span class="err">text.reset</span></code> at the end so it doesn't overflow into other text!</p>
+<div class="superfences-tabs">
+<input name="__tabs_4" type="radio" id="__tab_4_0" checked="checked" />
+<label for="__tab_4_0">Lua</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="nb">require</span> <span class="s2">&quot;ansikit.text&quot;</span>
+<span class="nb">print</span> <span class="n">text</span><span class="p">.</span><span class="n">bold</span> <span class="o">..</span> <span class="s2">&quot;hello&quot;</span> <span class="o">..</span> <span class="n">text</span><span class="p">.</span><span class="n">reset</span>
+</pre></div></div>
+<input name="__tabs_4" type="radio" id="__tab_4_1" />
+<label for="__tab_4_1">MoonScript</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="k">import</span> <span class="n">bold</span><span class="p">,</span> <span class="n">reset</span> <span class="k">from</span> <span class="nb">require</span> <span class="s2">&quot;</span><span class="s">ansikit.text</span><span class="s2">&quot;</span>
+<span class="nb">print</span> <span class="s2">&quot;</span><span class="s">#{bold}hello#{reset}</span><span class="s2">&quot;</span>
+</pre></div></div>
+</div>
+<h2 id="color-basics">Color basics<a class="headerlink" href="#color-basics" title="Permanent link">&para;</a></h2>
+<p>To use traditional ANSI escape codes, instead of boilerplate added by <code class="codehilite"><span class="err">ansikit</span></code> for color management, you can use the functions <a href="/module/color/#Bit4"><code class="codehilite"><span class="err">Bit4</span></code></a> for traditional ANSI escape sequences, <a href="/module/color/#Bit8"><code class="codehilite"><span class="err">Bit8</span></code></a> for 255-indexed and <a href="/module/color/#Bit24"><code class="codehilite"><span class="err">Bit24</span></code></a> for true color. These will generate strings you can concatenate to your strings to color them.</p>
+<div class="superfences-tabs">
+<input name="__tabs_5" type="radio" id="__tab_5_0" checked="checked" />
+<label for="__tab_5_0">Lua</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="nb">print</span> <span class="n">Bit4</span><span class="p">(</span><span class="mi">91</span><span class="p">,</span> <span class="mi">46</span><span class="p">)</span> <span class="o">..</span> <span class="s2">&quot;bright red text and cyan bg&quot;</span> <span class="o">..</span> <span class="n">reset</span>
+<span class="nb">print</span> <span class="n">Bit8</span><span class="p">(</span><span class="mi">226</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">..</span> <span class="s2">&quot;yellow background&quot;</span> <span class="o">..</span> <span class="n">reset</span>
+<span class="nb">print</span> <span class="n">Bit24</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="kc">true</span><span class="p">)</span> <span class="o">..</span> <span class="s2">&quot;rgb white background&quot;</span> <span class="o">..</span> <span class="n">reset</span>
+</pre></div></div>
+<input name="__tabs_5" type="radio" id="__tab_5_1" />
+<label for="__tab_5_1">MoonScript</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;</span><span class="s">#{Bit4 91, 46}bright red text and cyan bg#{reset}</span><span class="s2">&quot;</span>
+<span class="nb">print</span> <span class="s2">&quot;</span><span class="s">#{Bit8 226, true}yellow background#{reset}</span><span class="s2">&quot;</span>
+<span class="nb">print</span> <span class="s2">&quot;</span><span class="s">#{Bit24 255,255,255, true}rgb white background#{reset}</span><span class="s2">&quot;</span>
+</pre></div></div>
+</div>
+<p>But often, you will want to use something simpler, in which case, <a href="/module/style/"><code class="codehilite"><span class="err">ansikit.style</span></code></a> implements <a href="https://github.com/kikito/ansicolors.lua">ansicolors.lua</a> and <a href="https://github.com/Desvelao/chalk"><code class="codehilite"><span class="err">Chalk</span></code></a> clones. You can read more about them in the link to <code class="codehilite"><span class="err">ansikit.style</span></code>.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>All of this pretty much covers the basics of ansikit, and the next tutorial covers more on managing colors.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../module/text/" title="ansikit.text" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                ansikit.text
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../colors/" title="Colors" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Colors
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/daelvn" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://queer.party/@daelvn" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.8e03edeb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

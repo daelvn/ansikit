@@ -212,6 +212,19 @@
   
 
       
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../manual/basics/" class="md-tabs__link">
+          Manual
+        </a>
+      
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -353,6 +366,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#color" class="md-nav__link">
+    Color
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    background
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foreground" class="md-nav__link">
+    foreground
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hextorgb" class="md-nav__link">
+    hexToRGB
+  </a>
+  
+</li>
+      
       
         <li class="md-nav__item">
           <a href="#__source" class="md-nav__link md-nav__link--active">
@@ -459,6 +500,54 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Manual
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Manual
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/basics/" title="Basics" class="md-nav__link">
+      Basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../manual/colors/" title="Colors" class="md-nav__link">
+      Colors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -500,6 +589,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#color" class="md-nav__link">
+    Color
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    background
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#foreground" class="md-nav__link">
+    foreground
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hextorgb" class="md-nav__link">
+    hexToRGB
+  </a>
+  
+</li>
+      
       
         <li class="md-nav__item">
           <a href="#__source" class="md-nav__link md-nav__link--active">
@@ -536,6 +653,26 @@
 <h2 id="bit24">Bit24<a class="headerlink" href="#bit24" title="Permanent link">&para;</a></h2>
 <p><strong>Signature →</strong> <code class="codehilite"><span class="err">(number, number, number, boolean) -&gt; string</span></code><br></p>
 <p>Takes <code class="codehilite"><span class="err">r</span></code>, <code class="codehilite"><span class="err">g</span></code> and <code class="codehilite"><span class="err">b</span></code> parameters and a boolean that determines whether it is a foreground or background color (works as in <a href="#Bit8">Bit8</a>).</p>
+<h2 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h2>
+<p><strong>Signature →</strong> <code class="codehilite"><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="o">[</span><span class="n">boolean</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Color</span><span class="w"></span></code><br></p>
+<p>A function that creates a representation of an RGB color, with an optional background flag (if set to false, will be used as foreground, and otherwise as background. Defaults to false). The colors are passed in order <code class="codehilite"><span class="err">r</span></code>, <code class="codehilite"><span class="err">g</span></code>, <code class="codehilite"><span class="err">b</span></code>.</p>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">Lua</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="n">white</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">)</span>
+</pre></div></div>
+<input name="__tabs_1" type="radio" id="__tab_1_1" />
+<label for="__tab_1_1">MoonScript</label>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="n">white</span> <span class="o">=</span> <span class="nc">Color</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span>
+</pre></div></div>
+</div>
+<h2 id="background">background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h2>
+<p>Takes a <code class="codehilite"><span class="err">Color</span></code> and sets it to a background color.</p>
+<h2 id="foreground">foreground<a class="headerlink" href="#foreground" title="Permanent link">&para;</a></h2>
+<p>Takes a <code class="codehilite"><span class="err">Color</span></code> and sets it to a foreground color.</p>
+<h2 id="hextorgb">hexToRGB<a class="headerlink" href="#hextorgb" title="Permanent link">&para;</a></h2>
+<p><strong>Signature →</strong> <code class="codehilite"><span class="err">(number|string) -&gt; number, number, number</span></code><br></p>
+<p>Taxes a hex number or 6-digit long hex string and turns it into three RGB components.</p>
                 
                   
                     <h2 id="__source">Source</h2>
