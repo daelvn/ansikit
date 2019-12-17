@@ -9,6 +9,9 @@ char      =    (...) -> unpack [((x) -> ("number" == type x) and (string.char x)
 _Sequence = => (...) -> @ _fn (_tr char) _not_string ...
 Sequence  = _Sequence (sb, tb="") -> (...) -> sb .. "[" .. (table.concat {...}, ";") .. tb
 
-SGR = Sequence 27, "m"
+SGR   = Sequence 27, "m"
+reSGR = "#{string.char 27}%[(%d+);?(%d-);?(%d-)m"
 
-{ :Sequence, :SGR }
+unparseSGR = (sequence) -> sequence\match reSGR
+
+{ :Sequence, :SGR, :reSGR, :unparseSGR }

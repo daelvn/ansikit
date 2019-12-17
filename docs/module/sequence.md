@@ -25,3 +25,18 @@ color = Sequence(27)("m")
 color(38, 2, 255, 255, 255) -- ^[38;2;255;255;255m
 ```
 
+## SGR
+
+[`Sequence`](#Sequence) with the arguments `27` and `"m"` passed in.
+
+## reSGR
+
+**Pattern →** `string.char(27).."%[(%d+)<<m`
+
+A string that holds a pattern to match a `SGR` sequence of up to 3 parameters.
+
+## unparseSGR
+
+**Signature →** `(string) -> ...`<br>
+
+Takes an ANSI sequence and uses [`reSGR`](#reSGR) to return up to 3 digit matches in the sequence.
